@@ -1,6 +1,15 @@
+<<<<<<< HEAD
+/home/daniel/NetBeansProjects/proyectoSamba/Samba-OSL/src/main/java/com/rufus/sambagui/App.java
+/home/daniel/NetBeansProjects/proyectoSamba/Samba-OSL/src/main/java/com/rufus/sambagui/SecondaryController.java
+/home/daniel/NetBeansProjects/proyectoSamba/Samba-OSL/src/main/java/com/rufus/sambagui/PrimaryController.java
+/home/daniel/NetBeansProjects/proyectoSamba/Samba-OSL/src/main/java/com/rufus/sambagui/Principal.java
+/home/daniel/NetBeansProjects/proyectoSamba/Samba-OSL/src/main/java/com/rufus/sambagui/Interfaz.java
+/home/daniel/NetBeansProjects/proyectoSamba/Samba-OSL/src/main/java/module-info.java
+=======
 /home/katy/Escritorio/Samba-OSL/src/main/java/com/rufus/sambagui/Interfaz.java
 /home/katy/Escritorio/Samba-OSL/src/main/java/com/rufus/sambagui/SecondaryController.java
 /home/katy/Escritorio/Samba-OSL/src/main/java/com/rufus/sambagui/App.java
 /home/katy/Escritorio/Samba-OSL/src/main/java/com/rufus/sambagui/Principal.java
 /home/katy/Escritorio/Samba-OSL/src/main/java/module-info.java
 /home/katy/Escritorio/Samba-OSL/src/main/java/com/rufus/sambagui/PrimaryController.java
+>>>>>>> develop
