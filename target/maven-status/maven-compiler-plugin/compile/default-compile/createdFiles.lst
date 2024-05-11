@@ -1,10 +1,12 @@
 com/rufus/sambagui/Compartir.class
+com/rufus/sambagui/Interfaz$5.class
+com/rufus/sambagui/Interfaz$4.class
+com/rufus/sambagui/PrimaryController.class
+com/rufus/sambagui/Interfaz$1.class
 com/rufus/sambagui/App.class
 com/rufus/sambagui/Interfaz$2.class
 module-info.class
 com/rufus/sambagui/Interfaz.class
 com/rufus/sambagui/Principal.class
-com/rufus/sambagui/PrimaryController.class
 com/rufus/sambagui/Interfaz$3.class
-com/rufus/sambagui/Interfaz$1.class
 com/rufus/sambagui/SecondaryController.class

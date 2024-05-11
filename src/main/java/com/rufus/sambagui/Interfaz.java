@@ -188,11 +188,21 @@ public class Interfaz extends javax.swing.JFrame {
         editButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         editButton.setForeground(new java.awt.Color(255, 255, 255));
         editButton.setText("Editar");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
 
         deleteButton.setBackground(new java.awt.Color(62, 62, 62));
         deleteButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteButton.setText("Borrar");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout CompartirLayout = new javax.swing.GroupLayout(Compartir);
         Compartir.setLayout(CompartirLayout);
@@ -409,8 +419,16 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        compartir.add((DefaultTableModel) tablaDatos.getModel());
+       compartir.add((DefaultTableModel) tablaDatos.getModel());
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        compartir.delete(tablaDatos.getSelectedRow(), (DefaultTableModel) tablaDatos.getModel());
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        compartir.edit(tablaDatos.getSelectedRow(), (DefaultTableModel) tablaDatos.getModel());
+    }//GEN-LAST:event_editButtonActionPerformed
 
     /**
      * @param args the command line arguments
