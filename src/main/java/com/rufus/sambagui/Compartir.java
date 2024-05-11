@@ -15,15 +15,23 @@ public class Compartir {
     
     int num = 0; //variable simple que me servirá para asegurarme que añado, edito y quito filas distintas
     
-    public void add(DefaultTableModel modelo){
+    public void add(DefaultTableModel modelo){ //ojo que no tiene limite de cuántas filas puedo agregar
         modelo.addRow(new String[]{"" + num,"" + num,"" + num});
         num++;
     }
     public void edit(int fila, DefaultTableModel modelo){
-        //por ahora sólo para ver si selecciono la fila correcta
-        System.out.println("Editando la fila " + fila);
+        if(fila == -1){
+         //no hace nada
+        }else{
+            //por ahora sólo para ver si selecciono la fila correcta
+            System.out.println("Editando la fila " + fila);
+        }
     }
     public void delete(int fila, DefaultTableModel modelo){
-        modelo.removeRow(fila);
+        if(fila == -1){
+            //no hace nada
+        }else{
+            modelo.removeRow(fila);
+        }
     }
 }
