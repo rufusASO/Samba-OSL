@@ -4,6 +4,7 @@
  */
 package com.rufus.sambagui;
 
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 /**
@@ -17,11 +18,11 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
-        JTableHeader header = tabShare.getTableHeader();
+        JTableHeader header = tablaDatos.getTableHeader();
         header.setReorderingAllowed(false);
-        for(int i = 0; i < tabShare.getColumnModel().getColumnCount(); i++){
-            tabShare.getColumnModel().getColumn(i).setResizable(false);
-        }
+        for(int i = 0; i < tablaDatos.getColumnModel().getColumnCount(); i++){
+            tablaDatos.getColumnModel().getColumn(i).setResizable(false);
+        }   
     }
 
     /**
@@ -43,8 +44,8 @@ public class Interfaz extends javax.swing.JFrame {
         subtitulo2 = new javax.swing.JLabel();
         opciones2 = new javax.swing.JComboBox<>();
         Compartir = new javax.swing.JPanel();
-        tabScroll = new javax.swing.JScrollPane();
-        tabShare = new javax.swing.JTable();
+        tablaTitulos = new javax.swing.JScrollPane();
+        tablaDatos = new javax.swing.JTable();
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
@@ -63,7 +64,6 @@ public class Interfaz extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(30, 30, 30));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(900, 600));
 
         panelPrincipal.setBackground(new java.awt.Color(30, 30, 30));
         panelPrincipal.setPreferredSize(new java.awt.Dimension(900, 600));
@@ -140,13 +140,13 @@ public class Interfaz extends javax.swing.JFrame {
 
         Compartir.setBackground(new java.awt.Color(45, 45, 45));
 
-        tabScroll.setBackground(new java.awt.Color(62, 62, 62));
-        tabScroll.setForeground(new java.awt.Color(255, 255, 255));
+        tablaTitulos.setBackground(new java.awt.Color(62, 62, 62));
+        tablaTitulos.setForeground(new java.awt.Color(255, 255, 255));
 
-        tabShare.setBackground(new java.awt.Color(62, 62, 62));
-        tabShare.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
-        tabShare.setForeground(new java.awt.Color(255, 255, 255));
-        tabShare.setModel(new javax.swing.table.DefaultTableModel(
+        tablaDatos.setBackground(new java.awt.Color(62, 62, 62));
+        tablaDatos.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        tablaDatos.setForeground(new java.awt.Color(255, 255, 255));
+        tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Enabled", null, null, null, null, null},
                 {"Enabled", null, null, null, null, null},
@@ -172,12 +172,17 @@ public class Interfaz extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabScroll.setViewportView(tabShare);
+        tablaTitulos.setViewportView(tablaDatos);
 
         addButton.setBackground(new java.awt.Color(62, 62, 62));
         addButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         addButton.setForeground(new java.awt.Color(255, 255, 255));
         addButton.setText("Añadir");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         editButton.setBackground(new java.awt.Color(62, 62, 62));
         editButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
@@ -195,7 +200,7 @@ public class Interfaz extends javax.swing.JFrame {
             CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CompartirLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addComponent(tabScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tablaTitulos, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -214,8 +219,8 @@ public class Interfaz extends javax.swing.JFrame {
                         .addComponent(editButton)
                         .addGap(18, 18, 18)
                         .addComponent(deleteButton))
-                    .addComponent(tabScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(155, Short.MAX_VALUE))
+                    .addComponent(tablaTitulos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         Pestanias.addTab("Compartir", Compartir);
@@ -249,7 +254,7 @@ public class Interfaz extends javax.swing.JFrame {
                     .addGroup(groupSettingLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(titleGroup)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         groupSettingLayout.setVerticalGroup(
             groupSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +263,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(titleGroup)
                 .addGap(18, 18, 18)
                 .addComponent(groupName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         serverSettings.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
@@ -327,7 +332,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(TrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(serverSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(groupSetting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
 
         Pestanias.addTab("Trabajo", Trabajo);
@@ -342,7 +347,7 @@ public class Interfaz extends javax.swing.JFrame {
         );
         UsuariosLayout.setVerticalGroup(
             UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 415, Short.MAX_VALUE)
+            .addGap(0, 439, Short.MAX_VALUE)
         );
 
         Pestanias.addTab("Usuarios", Usuarios);
@@ -362,7 +367,7 @@ public class Interfaz extends javax.swing.JFrame {
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(638, Short.MAX_VALUE)
+                .addContainerGap(639, Short.MAX_VALUE)
                 .addComponent(cancelButton)
                 .addGap(40, 40, 40)
                 .addComponent(saveButton)
@@ -402,6 +407,10 @@ public class Interfaz extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        compartir.add((DefaultTableModel) tablaDatos.getModel());
+    }//GEN-LAST:event_addButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -460,10 +469,13 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLayeredPane serverSettings;
     private javax.swing.JLabel subtitulo1;
     private javax.swing.JLabel subtitulo2;
-    private javax.swing.JScrollPane tabScroll;
-    private javax.swing.JTable tabShare;
+    private javax.swing.JTable tablaDatos;
+    private javax.swing.JScrollPane tablaTitulos;
     private javax.swing.JLabel titleGroup;
     private javax.swing.JLabel titleServer;
     private javax.swing.JLabel titulo1;
     // End of variables declaration//GEN-END:variables
+    
+    //aqui va mi la instancia de mi clase que hará todo las funciones de mi respectiva pestaña (DANIEL)
+    Compartir compartir = new Compartir();   
 }
