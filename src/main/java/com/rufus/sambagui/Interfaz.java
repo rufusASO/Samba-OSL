@@ -49,6 +49,7 @@ public class Interfaz extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         Trabajo = new javax.swing.JPanel();
         groupSetting = new javax.swing.JLayeredPane();
         titleGroup = new javax.swing.JLabel();
@@ -204,6 +205,13 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CompartirLayout = new javax.swing.GroupLayout(Compartir);
         Compartir.setLayout(CompartirLayout);
         CompartirLayout.setHorizontalGroup(
@@ -211,17 +219,23 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(CompartirLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(tablaTitulos, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(32, 32, 32))
+            .addGroup(CompartirLayout.createSequentialGroup()
+                .addGap(337, 337, 337)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CompartirLayout.setVerticalGroup(
             CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CompartirLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(17, 17, 17)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
                 .addGroup(CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CompartirLayout.createSequentialGroup()
                         .addComponent(addButton)
@@ -430,6 +444,10 @@ public class Interfaz extends javax.swing.JFrame {
         compartir.edit(tablaDatos.getSelectedRow(), (DefaultTableModel) tablaDatos.getModel());
     }//GEN-LAST:event_editButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        compartir.leerArchivoConf();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -478,6 +496,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel estado;
     private javax.swing.JTextField groupName;
     private javax.swing.JLayeredPane groupSetting;
+    private javax.swing.JButton jButton1;
     private javax.swing.JRadioButton offSettings;
     private javax.swing.JRadioButton onSettings;
     private javax.swing.JComboBox<String> opciones1;

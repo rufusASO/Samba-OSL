@@ -6,4 +6,5 @@ module com.rufus.sambagui {
 
     opens com.rufus.sambagui to javafx.fxml;
     exports com.rufus.sambagui;
+    requires ini4j;
 }
