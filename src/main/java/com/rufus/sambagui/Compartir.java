@@ -12,7 +12,6 @@ import java.util.Properties;
 
 import org.ini4j.Ini;
 import org.ini4j.Wini;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -45,22 +44,6 @@ public class Compartir {
     }
     
     
-
-    /*
-    public void leerArchivoConf(){
-        Properties prop = new Properties();
-        try (FileInputStream input = new FileInputStream("/etc/samba/smb.conf")) {
-            // Load a properties file
-            prop.load(input);
-            // Get the value of the property "key"
-            String value = prop.getProperty("comment");
-            System.out.println("Value: " + value);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }*///Este método usa la clase PROPERTIES, pero no es muy util, porque sólo se queda con el último valor leído.
-    
-
     /*public  void leerArchivoConf() {
         try {
             // Cargar el archivo smb.conf
@@ -83,7 +66,8 @@ public class Compartir {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }*///ESTE ES LA MUESTRA ORIGINAL PARA LEER EL ARCHIVO. SÓLO REFERENCIA PARA VER QUÉ HACÍA CADA COSA
+    
     public  void leerArchivoConf() {
         try {
             // Cargar el archivo smb.conf
@@ -108,7 +92,34 @@ public class Compartir {
         }
     }
 
+    /*//ESTO DE AQUÍ ES UN EJEMPLO PARA COLOCAR ## Y DESHABILITAR UNA SECCIÓN DEL ARCHIVO. AÚN NO LO PROBÉ.
+    public  void inhabilitar() {
+        try {
+            // Cargar el archivo smb.conf
+            Wini ini = new Wini(new File("/etc/samba/smb.conf"));
 
+            // Supongamos que queremos comentar toda la sección 'global'
+            if (ini.containsKey("global")) {
+                // Obtenemos todas las claves de la sección 'global'
+                for (String key : ini.get("global").keySet()) {
+                    // Obtenemos el valor actual
+                    String value = ini.get("global", key);
+                    // Cambiamos la clave a una versión comentada
+                    ini.put("global", "#" + key, value);
+                    // Eliminamos la clave original
+                    ini.remove("global", key);
+                }
+            }
+
+            // Guardar los cambios en el archivo
+            ini.store();
+
+            System.out.println("Sección 'global' comentada exitosamente.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
 
  
     
