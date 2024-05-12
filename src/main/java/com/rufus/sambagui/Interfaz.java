@@ -150,10 +150,7 @@ public class Interfaz extends javax.swing.JFrame {
         tablaDatos.setForeground(new java.awt.Color(255, 255, 255));
         tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Enabled", null, null, null, null, null},
-                {"Enabled", null, null, null, null, null},
-                {"Enabled", null, null, null, null, null},
-                {"Enabled", null, null, null, null, null}
+
             },
             new String [] {
                 "Status", "Read-Only", "Name", "Path", "Guest Acces", "Comment"
@@ -206,7 +203,7 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Prueba para ver si lee el archivo smb.conf");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -461,7 +458,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        compartir.leerSmb((DefaultTableModel) tablaDatos.getModel());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

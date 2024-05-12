@@ -345,13 +345,8 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="6" rowCount="4">
-                            <Column editable="false" title="Status" type="java.lang.String">
-                              <Data value="Enabled"/>
-                              <Data value="Enabled"/>
-                              <Data value="Enabled"/>
-                              <Data value="Enabled"/>
-                            </Column>
+                          <Table columnCount="6" rowCount="0">
+                            <Column editable="false" title="Status" type="java.lang.String"/>
                             <Column editable="false" title="Read-Only" type="java.lang.String"/>
                             <Column editable="false" title="Name" type="java.lang.String"/>
                             <Column editable="false" title="Path" type="java.lang.String"/>
@@ -453,7 +448,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jButton1"/>
+                    <Property name="text" type="java.lang.String" value="Prueba para ver si lee el archivo smb.conf"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>

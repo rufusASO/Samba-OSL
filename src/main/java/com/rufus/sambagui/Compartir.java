@@ -14,6 +14,7 @@ import org.ini4j.Ini;
 import org.ini4j.Wini;
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Compartir {
     
     int num = 0; //variable simple que me servirá para asegurarme que añado, edito y quito filas distintas
     
+    //ESTOS BOTONES AÚN NO ESTÁN IMPLEMENTADOS CON SUS FUNCIONES CORRESPONDIENTES. Por ahora sólo responden a la fila seleccionada.
     public void add(DefaultTableModel modelo){ //ojo que no tiene limite de cuántas filas puedo agregar
         modelo.addRow(new String[]{"" + num,"" + num,"" + num});
         num++;
@@ -68,13 +70,15 @@ public class Compartir {
         }
     }*///ESTE ES LA MUESTRA ORIGINAL PARA LEER EL ARCHIVO. SÓLO REFERENCIA PARA VER QUÉ HACÍA CADA COSA
     
+    
+    //ESTE MÉTODO solo era de prueba para la lectura del archivo. BORRAR CUANDO NO SEA NECESARIO.
     public  void leerArchivoConf() {
         try {
             // Cargar el archivo smb.conf
-            Wini ini = new Wini(new File("/etc/samba/smb.conf"));
+            Wini smb = new Wini(new File("/etc/samba/smb.conf"));
 
             // Leer una propiedad, por ejemplo, la propiedad 'workgroup' en la sección 'global'
-            String comment = ini.get("recursoluis", "comment");
+            String comment = smb.get("recursoluis", "comment");
             System.out.println("comentario actual: " + comment);
 
             // Modificar el valor de 'workgroup' en la sección 'global'
@@ -91,7 +95,38 @@ public class Compartir {
             e.printStackTrace();
         }
     }
-
+    
+    //Este método es para leer los datos de smb.conf y ponerlos en tabla. Por ahora sólo es un método llamado por botón.
+    //supuestamente debería llamarse a este método al iniciar la aplicación.
+    public void leerSmb(DefaultTableModel tabla){
+        try{
+            //Cargo el archivo smb.conf
+            Wini smb = new Wini(new File("/etc/samba/smb.conf"));
+            // Obtener todas las secciones del archivo INI
+            Set<String> sectionNames = smb.keySet(); //ESTO AÚN NO OBTIENE LAS SECCIONES INHABILITADAS CON #. Haré eso con lectura en texto plano.
+            //Ahora llenaré la tabla con estas secciones
+            llenarTabla(sectionNames, tabla);
+            
+            //Este sólo es un for para ver las secciones que está leyendo. Borrar cuando no se necesario.
+            for (String sectionName : sectionNames) {
+                System.out.println("Sección: " + sectionName);
+            }
+            
+        }catch(IOException e){
+                e.printStackTrace();
+        }
+    }
+    //FALTA AÑADIR LOS DEMÁS DATOS. (Sólo estal las secciones)
+    private void llenarTabla(Set<String> sectionNames, DefaultTableModel tabla){
+        for(String sectionName : sectionNames){
+            if(("global").equals(sectionName)){
+                //Si la sección es la global. NO hace nada.
+            }else{
+                tabla.addRow(new String[]{"Enable", ""+sectionName}); //Añade las secciones a la tabla
+            }
+        }
+    }
+    
     /*//ESTO DE AQUÍ ES UN EJEMPLO PARA COLOCAR ## Y DESHABILITAR UNA SECCIÓN DEL ARCHIVO. AÚN NO LO PROBÉ.
     public  void inhabilitar() {
         try {
