@@ -77,9 +77,20 @@ public class Compartir {
             // Cargar el archivo smb.conf
             Wini smb = new Wini(new File("/etc/samba/smb.conf"));
 
-            // Leer una propiedad, por ejemplo, la propiedad 'workgroup' en la sección 'global'
-            String comment = smb.get("recursoluis", "comment");
-            System.out.println("comentario actual: " + comment);
+            Set<String> sectionNames = smb.keySet();
+            for (String sectionName : sectionNames) {
+                String name = smb.get("" + sectionName, "name");
+                String path = smb.get("" + sectionName, "path");
+                String guestAccess = smb.get("" + sectionName, "guest ok");
+                if(guestAccess == null) guestAccess = "No";
+                String comment = smb.get("" + sectionName, "comment");
+                
+                System.out.println("/[" + sectionName + "/]");
+                System.out.println("Name = " + name);
+                System.out.println("Path = " + path);
+                System.out.println("Guest ok = " + guestAccess);
+                System.out.println("Comment = " + comment);
+            }
 
             // Modificar el valor de 'workgroup' en la sección 'global'
             //ini.put("global", "workgroup", "NEW_WORKGROUP");
@@ -102,27 +113,46 @@ public class Compartir {
         try{
             //Cargo el archivo smb.conf
             Wini smb = new Wini(new File("/etc/samba/smb.conf"));
-            // Obtener todas las secciones del archivo INI
-            Set<String> sectionNames = smb.keySet(); //ESTO AÚN NO OBTIENE LAS SECCIONES INHABILITADAS CON #. Haré eso con lectura en texto plano.
-            //Ahora llenaré la tabla con estas secciones
-            llenarTabla(sectionNames, tabla);
-            
-            //Este sólo es un for para ver las secciones que está leyendo. Borrar cuando no se necesario.
-            for (String sectionName : sectionNames) {
-                System.out.println("Sección: " + sectionName);
-            }
+            // Llenado de tabla
+            llenarTabla(smb, tabla);
             
         }catch(IOException e){
                 e.printStackTrace();
         }
     }
-    //FALTA AÑADIR LOS DEMÁS DATOS. (Sólo estal las secciones)
-    private void llenarTabla(Set<String> sectionNames, DefaultTableModel tabla){
+    
+    //ESTAN LOS DATOS. PERO SÓLO LEE LAS SECCIONES HABILITADAS.
+    private void llenarTabla(Wini smb, DefaultTableModel tabla){
+        //Esta línea obtiene las secciones.
+        Set<String> sectionNames = smb.keySet(); //ESTO AÚN NO OBTIENE LAS SECCIONES INHABILITADAS CON #. Haré eso con lectura en texto plano.
+        
         for(String sectionName : sectionNames){
             if(("global").equals(sectionName)){
                 //Si la sección es la global. NO hace nada.
             }else{
-                tabla.addRow(new String[]{"Enable", ""+sectionName}); //Añade las secciones a la tabla
+                //LEE CADA SECCIÓN Y OBTIENE LOS VALORES DESEADOS
+                String readOnly = smb.get("" + sectionName, "read only");
+                if(readOnly == null) readOnly = "yes"; //Al parecer, si no se especifica este valor por defecto = Yes. (Eso lo ví con el yast).
+                readOnly = Character.toUpperCase(readOnly.charAt(0)) + readOnly.substring(1);//Esto solo coloca el primer caracter en mayuscula.
+                
+                String path = smb.get("" + sectionName, "path");
+                if(path == null) path = ""; //Al parecer, si no se especifica este valor por defecto = "". (Eso lo ví con el yast).
+                
+                String guestAccess = smb.get("" + sectionName, "guest ok");
+                if(guestAccess == null) guestAccess = "no"; //Al parecer, si no se especifica este valor por defecto = No. (Eso lo ví con el yast).
+                guestAccess = Character.toUpperCase(guestAccess.charAt(0)) + guestAccess.substring(1);//Esto solo coloca el primer caracter en mayuscula.
+                
+                String comment = smb.get("" + sectionName, "comment");
+                
+                //AÑADE ESOS VALORES DESEADOS A LA TABLA. (en el orden de secciones que se encuentra en el mismo smb.conf)
+                tabla.addRow(new String[]{"Enable",readOnly,sectionName,path,guestAccess,comment});
+                
+                //Salida en consola sólo para ver modificaciones. Borrar cuando no sea necesario.
+                System.out.println("[" + sectionName + "]");
+                System.out.println("\t read only = " + readOnly);
+                System.out.println("\t Path = " + path);
+                System.out.println("\t Guest ok = " + guestAccess);
+                System.out.println("\t Comment = " + comment);
             }
         }
     }
