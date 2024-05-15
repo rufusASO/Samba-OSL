@@ -21,7 +21,7 @@ public class Interfaz extends javax.swing.JFrame {
         JTableHeader header = tablaDatos.getTableHeader();
         header.setReorderingAllowed(false);
         for(int i = 0; i < tablaDatos.getColumnModel().getColumnCount(); i++){
-            tablaDatos.getColumnModel().getColumn(i).setResizable(false);
+            tablaDatos.getColumnModel().getColumn(i).setResizable(true);
         }   
     }
 
@@ -171,6 +171,7 @@ public class Interfaz extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaDatos.setRowHeight(30);
         tablaTitulos.setViewportView(tablaDatos);
 
         addButton.setBackground(new java.awt.Color(62, 62, 62));
@@ -222,9 +223,9 @@ public class Interfaz extends javax.swing.JFrame {
         CompartirLayout.setHorizontalGroup(
             CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CompartirLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(tablaTitulos, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                .addComponent(tablaTitulos)
+                .addGap(18, 18, 18)
                 .addGroup(CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -235,7 +236,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(100, 100, 100)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         CompartirLayout.setVerticalGroup(
             CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +254,7 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(deleteButton))
                     .addComponent(tablaTitulos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         Pestanias.addTab("Compartir", Compartir);
