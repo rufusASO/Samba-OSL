@@ -4,6 +4,7 @@
  */
 package com.rufus.sambagui;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -204,7 +205,7 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Prueba para ver si lee el archivo smb.conf");
+        jButton1.setText("Prueba");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -236,7 +237,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(100, 100, 100)
                 .addComponent(jButton1)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         CompartirLayout.setVerticalGroup(
             CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,7 +448,15 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        compartir.delete(tablaDatos.getSelectedRow(), tablaDatos);
+        String[] opciones = {"Yes" , "No"};
+        String seccionABorrar = (String) tablaDatos.getValueAt(tablaDatos.getSelectedRow(), 2);
+        System.out.println("A punto de eliminar la sección: " + seccionABorrar);
+        int i = JOptionPane.showOptionDialog(this, "If you delete share " + seccionABorrar + ", all its settings will be lost.\nReally delete it?", "Eliminando Recurso", WIDTH, HEIGHT, null, opciones, opciones[0]);
+        if(i == 1){ //SE SELECCIONÓ NO
+            System.out.println("Se canceló el borrado");
+        }else{
+            compartir.delete(tablaDatos.getSelectedRow(), tablaDatos, seccionABorrar);
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed

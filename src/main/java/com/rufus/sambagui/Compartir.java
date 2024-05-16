@@ -32,7 +32,7 @@ public class Compartir {
         fsmb = new File("/etc/samba/smb.conf");
         smb = new Wini(fsmb);
         }catch(IOException e){
-            System.out.println("NO SE PUDO CARGAR ARCHIVO PARA TRABAJAR CON ÉL");
+            System.out.println("NO SE PUDO CARGAR ARCHIVO smb.conf PARA TRABAJAR CON ÉL");
         }
     }
     
@@ -40,7 +40,7 @@ public class Compartir {
     
     //Al terminar interfaz del botón ADD, debo pasarle parametros del nombre, path, comment, etc. que
     // serán dados por el usuario en la ventana/panel nuevo que se abrirá por este botón)
-    public void add(DefaultTableModel modelo){
+    public void add(DefaultTableModel modeloTabla){
         try {
             // Agregar una nueva sección con algunos valores
             String newSectionName = "RecursoNetLuis";
@@ -50,7 +50,7 @@ public class Compartir {
             smb.put(newSectionName, "guest ok", "No");
 
             //Agrega esta nueva sección a la tabla
-            agregarFilaTabla(newSectionName, modelo);
+            agregarFilaTabla(newSectionName, modeloTabla);
             
             // Guardar los cambios en el archivo. SE SUPONE QUE ESTO NO SE HACE HASTA QUE SE CONFIRME.
             smb.store();
@@ -62,7 +62,7 @@ public class Compartir {
     }
     
     //ESTE BOTON AÚN NO ESTÁN IMPLEMENTADOS CON SU FUNCIONES CORRESPONDIENTE.
-    public void edit(int fila, DefaultTableModel modelo){
+    public void edit(int fila, DefaultTableModel modeloTabla){
         if(fila == -1){
          //no hace nada
         }else{
@@ -72,14 +72,10 @@ public class Compartir {
     }
     
     //Funcion implementada. Falta su interfaz (que sería un JOptionPane).
-    public void delete(int fila, JTable tabla){
-        System.out.println("A punto de eliminar la sección: ");
-        String seccion = (String) tabla.getValueAt(fila, 2); //supuestamente la columna 2 es de nombres de secciones.
-        System.out.println(seccion);
-        
+    public void delete(int fila, JTable tabla, String seccionAEliminar){
         try {
             // Eliminar la sección
-            if (smb.remove(seccion) != null) {
+            if (smb.remove(seccionAEliminar) != null) {
                 System.out.println("Sección eliminada exitosamente.");
             } else {
                 System.out.println("La sección no fue encontrada.");
@@ -88,17 +84,15 @@ public class Compartir {
             // Guardar los cambios en el archivo
             smb.store();
             
-            DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
-            modelo.removeRow(fila);
+            DefaultTableModel modeloTabla = (DefaultTableModel) tabla.getModel();
+            modeloTabla.removeRow(fila);
             reiniciarServicioSMB();
         } catch (IOException e) {
             System.err.println("Error al modificar el archivo INI: " + e.getMessage());
         }
     }
     
-    //Puedo refactorizar esta parte. En un futuro hacer que este método sea llamado desde el método: llenartabla()
-    //  para cada sección.
-    private void agregarFilaTabla(String newSection, DefaultTableModel tabla){
+    private void agregarFilaTabla(String newSection, DefaultTableModel modeloTabla){
         
         String readOnly = smb.get(newSection, "read only");
         if(readOnly == null) readOnly = "Yes"; //Si no se especifica, es = Yes
@@ -113,7 +107,7 @@ public class Compartir {
         
         String comment = smb.get(newSection, "comment");
         
-        tabla.addRow(new String[]{"Enable",readOnly,newSection,path,guestAccess,comment});
+        modeloTabla.addRow(new String[]{"Enable",readOnly,newSection,path,guestAccess,comment});
     }
     
     
@@ -134,6 +128,7 @@ public class Compartir {
         try{
             String comando;
             comando = "sudo service smb restart";
+            System.out.println("Servicio REINICIADO");
             //Ejecución del comando
             Process p = Runtime.getRuntime().exec(comando);
             //BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -158,14 +153,14 @@ public class Compartir {
     
     //Este método es para leer los datos de smb.conf y ponerlos en tabla. Por ahora sólo es un método llamado por botón.
     //supuestamente debería llamarse a este método al iniciar la aplicación.
-    public void leerSmb(DefaultTableModel tabla){
+    public void leerSmb(DefaultTableModel modeloTabla){
             //Esta línea obtiene las secciones.
             Set<String> sectionNames = smb.keySet(); //ESTO AÚN NO OBTIENE LAS SECCIONES INHABILITADAS CON #. Haré eso con lectura en texto plano.
             for(String sectionName : sectionNames){
                 if(("global").equals(sectionName)){
                     //Si la sección es la global. NO hace nada.
                 }else{
-                    agregarFilaTabla(sectionName, tabla);
+                    agregarFilaTabla(sectionName, modeloTabla);
                 }
             }
     }
