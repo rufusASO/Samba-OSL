@@ -447,7 +447,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        compartir.delete(tablaDatos.getSelectedRow(), (DefaultTableModel) tablaDatos.getModel());
+        compartir.delete(tablaDatos.getSelectedRow(), tablaDatos);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
