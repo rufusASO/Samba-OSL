@@ -444,10 +444,9 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-       //compartir.add((DefaultTableModel) tablaDatos.getModel());
        Anadir formulario = new Anadir(this, true);
        
-       //Orden: ReadOnly, Nombre, Path, Comentario.
+       //Orden: ReadOnly, Nombre, Path, Guest Access , Comentario.
        String[] datos = formulario.getDatos();
        
        if(datos == null){
@@ -458,6 +457,7 @@ public class Interfaz extends javax.swing.JFrame {
            for(String dato : datos){
              System.out.println(dato);
            }
+           compartir.add(datos, (DefaultTableModel) tablaDatos.getModel());
        }
     }//GEN-LAST:event_addButtonActionPerformed
 

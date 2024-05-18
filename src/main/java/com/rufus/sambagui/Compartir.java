@@ -40,19 +40,28 @@ public class Compartir {
     
     //Al terminar interfaz del botón ADD, debo pasarle parametros del nombre, path, comment, etc. que
     // serán dados por el usuario en la ventana/panel nuevo que se abrirá por este botón)
-    public void add(DefaultTableModel modeloTabla){
+    public void add(String[] datos, DefaultTableModel modeloTabla){
         try {
             // Agregar una nueva sección con algunos valores
+            //Orden: 0:ReadOnly , 1:Nombre , 2:Path , 3:Guest Access , 4:Comentario.
+            String newSectionName = datos[1];
+            smb.add(newSectionName);
+            smb.put(newSectionName, "comment", datos[4]);
+            smb.put(newSectionName, "path", datos[2]);
+            smb.put(newSectionName, "guest ok", datos[3]);
+            smb.put(newSectionName, "read only", datos[0]);
+            
+            /*
             String newSectionName = "RecursoNetLuis";
             smb.add(newSectionName);
             smb.put(newSectionName, "comment", "Carpeta creada por Luis en dir Luissmb, compartido por Net");
             smb.put(newSectionName, "path", "/home/luissmb/creadoPorLuis");
-            smb.put(newSectionName, "guest ok", "No");
+            smb.put(newSectionName, "guest ok", "No");*/
 
             //Agrega esta nueva sección a la tabla
             agregarFilaTabla(newSectionName, modeloTabla);
             
-            // Guardar los cambios en el archivo. SE SUPONE QUE ESTO NO SE HACE HASTA QUE SE CONFIRME.
+            // Guardar los cambios en el archivo.
             smb.store();
             reiniciarServicioSMB();
             System.out.println("Sección agregada exitosamente.");

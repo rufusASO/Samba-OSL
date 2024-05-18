@@ -11,7 +11,7 @@ package com.rufus.sambagui;
  */
 public class Anadir extends javax.swing.JDialog {
 
-    private String[] datos = new String[4];
+    private String[] datos = new String[5];
     
     /** Creates new form Anadir */
     public Anadir(java.awt.Frame parent, boolean modal) {
@@ -40,6 +40,7 @@ public class Anadir extends javax.swing.JDialog {
         ubicacionRecurso = new javax.swing.JLabel();
         campoPath = new javax.swing.JTextField();
         readOnly = new javax.swing.JCheckBox();
+        guestAccess = new javax.swing.JCheckBox();
         identificacion = new javax.swing.JLabel();
         botonBack = new javax.swing.JButton();
         botonOK = new javax.swing.JButton();
@@ -97,6 +98,8 @@ public class Anadir extends javax.swing.JDialog {
 
         readOnly.setText("Read-Only");
 
+        guestAccess.setText("Guest Access");
+
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
         panel2Layout.setHorizontalGroup(
@@ -108,7 +111,8 @@ public class Anadir extends javax.swing.JDialog {
                     .addGroup(panel2Layout.createSequentialGroup()
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ubicacionRecurso)
-                            .addComponent(readOnly))
+                            .addComponent(readOnly)
+                            .addComponent(guestAccess))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -121,7 +125,9 @@ public class Anadir extends javax.swing.JDialog {
                 .addComponent(campoPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(readOnly)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(guestAccess)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         identificacion.setForeground(new java.awt.Color(242, 242, 242));
@@ -178,7 +184,7 @@ public class Anadir extends javax.swing.JDialog {
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonOK)
                     .addComponent(botonBack))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -202,7 +208,12 @@ public class Anadir extends javax.swing.JDialog {
 
     private void botonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOKActionPerformed
         //Solo lectura?
-        String rO = "" + readOnly.isSelected();
+        String rO;
+        if(readOnly.isSelected()){
+            rO = "Yes";
+        }else{
+            rO = "No";
+        }
         datos[0] = rO;
         
         //Nombre
@@ -213,9 +224,19 @@ public class Anadir extends javax.swing.JDialog {
         String path = campoPath.getText();
         datos[2] = path;
         
+        //Guest Access
+        String guest;
+        if(guestAccess.isSelected()){
+            guest = "Yes";
+        }else{
+            guest = "No";
+        }
+        datos[3] = guest;
+        
         //Comentario/Descripción
         String comment = campoDescrip.getText();
-        datos[3] = comment;
+        datos[4] = comment;
+        
         
         dispose();
     }//GEN-LAST:event_botonOKActionPerformed
@@ -275,6 +296,7 @@ public class Anadir extends javax.swing.JDialog {
     private javax.swing.JTextField campoNombre;
     private javax.swing.JTextField campoPath;
     private javax.swing.JLabel descrRecurso;
+    private javax.swing.JCheckBox guestAccess;
     private javax.swing.JLabel identificacion;
     private javax.swing.JLabel nombreRecurso;
     private javax.swing.JLabel nuevoRecurso;
