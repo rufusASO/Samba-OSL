@@ -444,7 +444,21 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-       compartir.add((DefaultTableModel) tablaDatos.getModel());
+       //compartir.add((DefaultTableModel) tablaDatos.getModel());
+       Anadir formulario = new Anadir(this, true);
+       
+       //Orden: ReadOnly, Nombre, Path, Comentario.
+       String[] datos = formulario.getDatos();
+       
+       if(datos == null){
+           System.out.println("Se dió el botón ATRÁS");
+       }else if(datos[0] == null){
+           System.out.println("Se CERRÓ LA VENTANA");
+       }else{
+           for(String dato : datos){
+             System.out.println(dato);
+           }
+       }
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
