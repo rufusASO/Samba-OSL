@@ -4,13 +4,11 @@
  */
 package com.rufus.sambagui;
 
-//import java.io.BufferedReader; si en algún momento quiero leer la salida de comando usar esto.
 import javax.swing.table.DefaultTableModel;
 
 import org.ini4j.Wini;
 import java.io.File;
 import java.io.IOException;
-//import java.io.InputStreamReader; //igual usado para leer la salida de comando.
 import java.util.Set;
 import javax.swing.JTable;
 
@@ -21,19 +19,13 @@ import javax.swing.JTable;
 public class Compartir {
     
     //Vamos a tener para cualquier método un sólo Archivo a modificar: El smb.conf
-    File fsmb;
+    //File fsmb;
     Wini smb;
     
     
-    //Por ahora al instanciar el objeto se obtiene el archivo solito. Pero al juntar
-    // todo debería darsele el archivo smb.conf como parámetro.
-    public Compartir(){
-        try{
-        fsmb = new File("/etc/samba/smb.conf");
-        smb = new Wini(fsmb);
-        }catch(IOException e){
-            System.out.println("NO SE PUDO CARGAR ARCHIVO smb.conf PARA TRABAJAR CON ÉL");
-        }
+    
+    public Compartir(Wini smbCopia){
+        this.smb = smbCopia;
     }
     
     
@@ -51,13 +43,7 @@ public class Compartir {
             smb.put(newSectionName, "guest ok", datos[3]);
             smb.put(newSectionName, "read only", datos[0]);
             
-            /*
-            String newSectionName = "RecursoNetLuis";
-            smb.add(newSectionName);
-            smb.put(newSectionName, "comment", "Carpeta creada por Luis en dir Luissmb, compartido por Net");
-            smb.put(newSectionName, "path", "/home/luissmb/creadoPorLuis");
-            smb.put(newSectionName, "guest ok", "No");*/
-
+            
             //Agrega esta nueva sección a la tabla
             agregarFilaTabla(newSectionName, modeloTabla);
             
@@ -70,17 +56,13 @@ public class Compartir {
         }
     }
     
-    //ESTE BOTON AÚN NO ESTÁN IMPLEMENTADOS CON SU FUNCIONES CORRESPONDIENTE.
-    public void edit(int fila, DefaultTableModel modeloTabla){
-        if(fila == -1){
-         //no hace nada
-        }else{
-            //por ahora sólo para ver si selecciono la fila correcta
-            System.out.println("Editando la fila " + fila);
-        }
+    public void edit(int fila, JTable tablaDatos){
+        
+        String seccionAEditar = (String) tablaDatos.getValueAt(tablaDatos.getSelectedRow(), 2);
+        System.out.println("Editando la sección " + seccionAEditar);
+        
     }
     
-    //Funcion implementada. Falta su interfaz (que sería un JOptionPane).
     public void delete(int fila, JTable tabla, String seccionAEliminar){
         try {
             // Eliminar la sección
@@ -123,13 +105,10 @@ public class Compartir {
     /*
             // Modificar el valor de 'workgroup' en la sección 'global'
             smb.put("global", "workgroup", "NEW_WORKGROUP");
+            path : /home/luissmb/creadoPorLuis
+            
     */
     
-    
-    //ESTE MÉTODO solo es para probar funcionalidades. BORRAR CUANDO NO SEA NECESARIO.
-    public  void botonPrueba() {
-        
-    }
     
     
     private void reiniciarServicioSMB(){

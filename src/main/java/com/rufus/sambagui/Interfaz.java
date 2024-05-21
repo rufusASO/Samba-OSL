@@ -4,9 +4,16 @@
  */
 package com.rufus.sambagui;
 
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import org.ini4j.Wini;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 /**
  *
@@ -24,7 +31,47 @@ public class Interfaz extends javax.swing.JFrame {
         for(int i = 0; i < tablaDatos.getColumnModel().getColumnCount(); i++){
             tablaDatos.getColumnModel().getColumn(i).setResizable(true);
         }   
+        
+        //Aquí se crea una copia de smb.conf. Por ahora es mi directorio /hom/daniel
+        crearCopiaSMB();
+        //Ahora se crean los Files
+        smbCopia = new File("/home/daniel/smbCopia.conf");
+        smbOriginal = new File("/etc/samba/smb.conf");        
+        
+        //Creo mi clase Compartir que maneja todas las funciones de esta pestaña
+        try{
+        Wini wSmbCopia = new Wini(smbCopia);
+        compartir = new Compartir(wSmbCopia);
+        }catch(IOException e){
+            System.out.println("No se puede crar un WINI smb");
+        }
+        
     }
+    
+    
+    private void crearCopiaSMB(){
+        // Define la ruta del archivo fuente
+        Path sourcePath = Paths.get("/etc/samba/smb.conf");
+
+        // Define la ruta del archivo destino en el directorio de ejecución de la aplicación
+        //Path destinationPath = Paths.get(System.getProperty("user.dir"), "smb_copy.conf");
+        Path destinationPath = Paths.get("/home/daniel","smbCopia.conf");
+        try {
+            // Copia el archivo
+            Files.copy(sourcePath, destinationPath);
+        } catch (IOException e) {
+            System.err.println("Error al copiar el archivo: " + e.getMessage());
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,8 +97,9 @@ public class Interfaz extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        botonPrueba = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        botonPrueba2 = new javax.swing.JButton();
         Trabajo = new javax.swing.JPanel();
         groupSetting = new javax.swing.JLayeredPane();
         titleGroup = new javax.swing.JLabel();
@@ -205,10 +253,10 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Prueba");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonPrueba.setText("Descarto");
+        botonPrueba.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonPruebaActionPerformed(evt);
             }
         });
 
@@ -216,6 +264,13 @@ public class Interfaz extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        botonPrueba2.setText("Confirmo");
+        botonPrueba2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPrueba2ActionPerformed(evt);
             }
         });
 
@@ -236,16 +291,19 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGap(153, 153, 153)
                 .addComponent(jButton2)
                 .addGap(100, 100, 100)
-                .addComponent(jButton1)
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addComponent(botonPrueba)
+                .addGap(18, 18, 18)
+                .addComponent(botonPrueba2)
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         CompartirLayout.setVerticalGroup(
             CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CompartirLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(botonPrueba)
+                    .addComponent(jButton2)
+                    .addComponent(botonPrueba2))
                 .addGap(18, 18, 18)
                 .addGroup(CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CompartirLayout.createSequentialGroup()
@@ -462,28 +520,82 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        String[] opciones = {"Yes" , "No"};
-        String seccionABorrar = (String) tablaDatos.getValueAt(tablaDatos.getSelectedRow(), 2);
-        System.out.println("A punto de eliminar la sección: " + seccionABorrar);
-        int i = JOptionPane.showOptionDialog(this, "If you delete share " + seccionABorrar + ", all its settings will be lost.\nReally delete it?", "Eliminando Recurso", WIDTH, HEIGHT, null, opciones, opciones[0]);
-        if(i == 1){ //SE SELECCIONÓ NO
-            System.out.println("Se canceló el borrado");
+        if(tablaDatos.getSelectedRow() == -1){
+            System.out.println("Sin seleccionar");
         }else{
-            compartir.delete(tablaDatos.getSelectedRow(), tablaDatos, seccionABorrar);
+            //String para el formulario emergente.
+            String[] opciones = {"Yes" , "No"};
+            //Qué sección se selecciona
+            String seccionABorrar = (String) tablaDatos.getValueAt(tablaDatos.getSelectedRow(), 2);
+            System.out.println("A punto de eliminar la sección: " + seccionABorrar);
+            //Se abre un cuadro de dialogo para confirmar el borrado
+            int i = JOptionPane.showOptionDialog(this, "If you delete share " + seccionABorrar + ", all its settings will be lost.\nReally delete it?", "Eliminando Recurso", WIDTH, HEIGHT, null, opciones, opciones[0]);
+            if(i == 1){ //SE SELECCIONÓ NO
+                System.out.println("Se canceló el borrado");
+            }else{
+                compartir.delete(tablaDatos.getSelectedRow(), tablaDatos, seccionABorrar);
+            }
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        compartir.edit(tablaDatos.getSelectedRow(), (DefaultTableModel) tablaDatos.getModel());
+        if(tablaDatos.getSelectedRow() == -1){
+            System.out.println("Sin seleccionar");
+        }else{
+            compartir.edit(tablaDatos.getSelectedRow(), tablaDatos);
+        }
+        
+        
     }//GEN-LAST:event_editButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        compartir.botonPrueba();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void botonPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPruebaActionPerformed
+        //DESCARTAMOS cambios solamente con borrar el archivo smbCopia y cerrar aplicación.
+        // Define la ruta del archivo a eliminar
+        Path pathToDelete = Paths.get("/home/daniel/", "smbCopia.conf");
+
+        try {
+            // Elimina el archivo
+            Files.delete(pathToDelete);
+            System.out.println("Archivo eliminado exitosamente.");
+
+        } catch (IOException e) {
+            System.err.println("Error al eliminar el archivo: " + e.getMessage());
+            // Manejar específicamente la situación cuando el archivo no existe
+            if (Files.notExists(pathToDelete)) {
+                System.err.println("El archivo no existe.");
+            }
+        }
+        System.exit(0);
+    }//GEN-LAST:event_botonPruebaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         compartir.leerSmb((DefaultTableModel) tablaDatos.getModel());
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void botonPrueba2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPrueba2ActionPerformed
+        //Esto confirma los cambios, por lo tanto se copia y reemplaza del smbCopia.conf al smb.conf original.
+        
+// Definir la ruta del archivo fuente
+        //Path sourcePath = Paths.get(System.getProperty("user.dir"), "smb_copy.conf");
+        Path sourcePath = Paths.get("/home/daniel", "smbCopia.conf");
+        
+        // Definir la ruta del archivo destino en otro directorio
+        Path destinationPath = Paths.get("/etc/samba","smb.conf");
+
+        try {
+            // Copiar el archivo desde la ruta de origen a la ruta de destino
+            // Usa REPLACE_EXISTING para sobrescribir el archivo destino si ya existe
+            Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Archivo copiado exitosamente a: " + destinationPath);
+            
+            //Ahora borro el temporal
+            Files.delete(sourcePath);
+        } catch (IOException e) {
+            System.err.println("Error al copiar el archivo: " + e.getMessage());
+        }
+        System.exit(0); //Ah si, dijo que no salieramos de la app. toca borrar esto y ver cómo volver
+                        //a ejecutar la parte de hacer copia y crear un nuevo compartir que haga todo.
+    }//GEN-LAST:event_botonPrueba2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -527,13 +639,14 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel Trabajo;
     private javax.swing.JPanel Usuarios;
     private javax.swing.JButton addButton;
+    private javax.swing.JButton botonPrueba;
+    private javax.swing.JButton botonPrueba2;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
     private javax.swing.JLabel estado;
     private javax.swing.JTextField groupName;
     private javax.swing.JLayeredPane groupSetting;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JRadioButton offSettings;
     private javax.swing.JRadioButton onSettings;
@@ -552,5 +665,8 @@ public class Interfaz extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     //aqui va mi la instancia de mi clase que hará todo las funciones de mi respectiva pestaña (DANIEL)
-    Compartir compartir = new Compartir();   
+    Compartir compartir;   
+    File smbCopia;
+    File smbOriginal;
+    
 }
