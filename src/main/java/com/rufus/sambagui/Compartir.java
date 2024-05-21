@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import org.ini4j.Wini;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 import javax.swing.JTable;
 
@@ -56,7 +57,7 @@ public class Compartir {
         }
     }
     
-    public void edit(int fila, JTable tablaDatos){
+    public void editSeccion(int fila, JTable tablaDatos){
         
         String seccionAEditar = (String) tablaDatos.getValueAt(tablaDatos.getSelectedRow(), 2);
         System.out.println("Editando la sección " + seccionAEditar);
@@ -151,6 +152,10 @@ public class Compartir {
                     agregarFilaTabla(sectionName, modeloTabla);
                 }
             }
+    }
+    
+    public Map<String,String> getValoresSeccion(String nombreSeccion){
+        return smb.get(nombreSeccion);
     }
     
     /*//ESTO DE AQUÍ ES UN EJEMPLO PARA COLOCAR ## Y DESHABILITAR UNA SECCIÓN DEL ARCHIVO. AÚN NO LO PROBÉ.

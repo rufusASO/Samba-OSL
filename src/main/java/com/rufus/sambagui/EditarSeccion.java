@@ -4,23 +4,47 @@
  */
 package com.rufus.sambagui;
 
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author root
  */
 public class EditarSeccion extends javax.swing.JDialog {
 
+    private Compartir compartir;
+    
+    
+    
     /**
      * Creates new form Editar
      */
     public EditarSeccion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        
     }
 
-    //método para hace rlas pruebas
-    public void hacerVisible(){
-        this.setVisible(true);
+    public void inicializar(Compartir compartir, String seccionAEditar){
+        this.compartir = compartir;
+        iniciarTabla(seccionAEditar);
+    }
+    
+    private void iniciarTabla(String nombreSeccion){
+        nombreRecurso.setText("Recurso " + nombreSeccion);     
+        Map<String,String> parValores = compartir.getValoresSeccion(nombreSeccion);
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaOpcion.getModel();
+        
+        if (parValores != null) {
+            // Iterar sobre todas las claves y valores en la sección
+            for (Map.Entry<String, String> entry : parValores.entrySet()) {
+                modeloTabla.addRow(new String[]{entry.getKey(),entry.getValue()});
+            }
+        }else{
+            System.out.println("La sección especificada no existe. (CLASE EDITARSECCION,iniciarTabla())");
+        }
     }
     
     
@@ -41,11 +65,11 @@ public class EditarSeccion extends javax.swing.JDialog {
         nombreRecurso = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaOpcion = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        botonAddValor = new javax.swing.JButton();
+        botonEditValor = new javax.swing.JButton();
+        botonDeleteValor = new javax.swing.JButton();
+        botonBack = new javax.swing.JButton();
+        botonGuardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,10 +80,7 @@ public class EditarSeccion extends javax.swing.JDialog {
 
         tablaOpcion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Opción", "Valor"
@@ -85,20 +106,25 @@ public class EditarSeccion extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tablaOpcion);
         tablaOpcion.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        jButton1.setText("Añadir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonAddValor.setText("Añadir");
+        botonAddValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonAddValorActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Editar");
+        botonEditValor.setText("Editar");
+        botonEditValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEditValorActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Eliminar");
+        botonDeleteValor.setText("Eliminar");
 
-        jButton4.setText("Atrás");
+        botonBack.setText("Atrás");
 
-        jButton5.setText("Guardar");
+        botonGuardar.setText("Guardar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,15 +136,15 @@ public class EditarSeccion extends javax.swing.JDialog {
                         .addGap(47, 47, 47)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(botonAddValor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)
+                                .addComponent(botonEditValor)
                                 .addGap(70, 70, 70)
-                                .addComponent(jButton3))
+                                .addComponent(botonDeleteValor))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton4)
+                                .addComponent(botonBack)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton5))
+                                .addComponent(botonGuardar))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
@@ -134,13 +160,13 @@ public class EditarSeccion extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(botonAddValor)
+                    .addComponent(botonEditValor)
+                    .addComponent(botonDeleteValor))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(botonBack)
+                    .addComponent(botonGuardar))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
@@ -162,10 +188,14 @@ public class EditarSeccion extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonAddValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAddValorActionPerformed
         AnadirValor formulario = new AnadirValor(this, true);
         formulario.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonAddValorActionPerformed
+
+    private void botonEditValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonEditValorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,11 +241,11 @@ public class EditarSeccion extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton botonAddValor;
+    private javax.swing.JButton botonBack;
+    private javax.swing.JButton botonDeleteValor;
+    private javax.swing.JButton botonEditValor;
+    private javax.swing.JButton botonGuardar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nombreRecurso;

@@ -552,10 +552,12 @@ public class Interfaz extends javax.swing.JFrame {
         if(tablaDatos.getSelectedRow() == -1){
             System.out.println("Sin seleccionar");
         }else{
-            compartir.edit(tablaDatos.getSelectedRow(), tablaDatos);
+            compartir.editSeccion(tablaDatos.getSelectedRow(), tablaDatos);
             //Se crea un formulario de llenado
+            String seccionAEditar = (String) tablaDatos.getValueAt(tablaDatos.getSelectedRow(), 2);
             EditarSeccion formulario = new EditarSeccion(this, true);
-            formulario.hacerVisible();
+            formulario.inicializar(compartir, seccionAEditar);
+            formulario.setVisible(true);
         }
         
         
