@@ -512,7 +512,7 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-       Anadir formulario = new Anadir(this, true);
+       AnadirSeccion formulario = new AnadirSeccion(this, true);
        
        //Orden: ReadOnly, Nombre, Path, Guest Access , Comentario.
        String[] datos = formulario.getDatos();
@@ -525,7 +525,7 @@ public class Interfaz extends javax.swing.JFrame {
            for(String dato : datos){
              System.out.println(dato);
            }
-           compartir.add(datos, (DefaultTableModel) tablaDatos.getModel());
+           compartir.addSeccion(datos, (DefaultTableModel) tablaDatos.getModel());
        }
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -543,7 +543,7 @@ public class Interfaz extends javax.swing.JFrame {
             if(i == 1){ //SE SELECCIONÓ NO
                 System.out.println("Se canceló el borrado");
             }else{
-                compartir.delete(tablaDatos.getSelectedRow(), tablaDatos, seccionABorrar);
+                compartir.deleteSeccion(tablaDatos.getSelectedRow(), tablaDatos, seccionABorrar);
             }
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
@@ -553,6 +553,9 @@ public class Interfaz extends javax.swing.JFrame {
             System.out.println("Sin seleccionar");
         }else{
             compartir.edit(tablaDatos.getSelectedRow(), tablaDatos);
+            //Se crea un formulario de llenado
+            EditarSeccion formulario = new EditarSeccion(this, true);
+            formulario.hacerVisible();
         }
         
         

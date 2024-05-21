@@ -32,7 +32,7 @@ public class Compartir {
     
     //Al terminar interfaz del botón ADD, debo pasarle parametros del nombre, path, comment, etc. que
     // serán dados por el usuario en la ventana/panel nuevo que se abrirá por este botón)
-    public void add(String[] datos, DefaultTableModel modeloTabla){
+    public void addSeccion(String[] datos, DefaultTableModel modeloTabla){
         try {
             // Agregar una nueva sección con algunos valores
             //Orden: 0:ReadOnly , 1:Nombre , 2:Path , 3:Guest Access , 4:Comentario.
@@ -63,7 +63,7 @@ public class Compartir {
         
     }
     
-    public void delete(int fila, JTable tabla, String seccionAEliminar){
+    public void deleteSeccion(int fila, JTable tabla, String seccionAEliminar){
         try {
             // Eliminar la sección
             if (smb.remove(seccionAEliminar) != null) {
