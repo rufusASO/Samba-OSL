@@ -111,7 +111,7 @@ public class Compartir {
     
     
     
-    private void reiniciarServicioSMB(){
+    public void reiniciarServicioSMB(){
         String s = "";
         try{
             String comando;

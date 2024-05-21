@@ -449,11 +449,21 @@ public class Interfaz extends javax.swing.JFrame {
         saveButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         saveButton.setForeground(new java.awt.Color(255, 255, 255));
         saveButton.setText("Guardar");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setBackground(new java.awt.Color(62, 62, 62));
         cancelButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelButton.setText("Cancelar");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -549,8 +559,20 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void botonPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPruebaActionPerformed
+        
+    }//GEN-LAST:event_botonPruebaActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        compartir.leerSmb((DefaultTableModel) tablaDatos.getModel());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void botonPrueba2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPrueba2ActionPerformed
+        
+    }//GEN-LAST:event_botonPrueba2ActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         //DESCARTAMOS cambios solamente con borrar el archivo smbCopia y cerrar aplicación.
-        // Define la ruta del archivo a eliminar
+        // Definir la ruta del archivo a eliminar
         Path pathToDelete = Paths.get("/home/daniel/", "smbCopia.conf");
 
         try {
@@ -565,17 +587,14 @@ public class Interfaz extends javax.swing.JFrame {
                 System.err.println("El archivo no existe.");
             }
         }
+        compartir.reiniciarServicioSMB();
         System.exit(0);
-    }//GEN-LAST:event_botonPruebaActionPerformed
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        compartir.leerSmb((DefaultTableModel) tablaDatos.getModel());
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void botonPrueba2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPrueba2ActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         //Esto confirma los cambios, por lo tanto se copia y reemplaza del smbCopia.conf al smb.conf original.
         
-// Definir la ruta del archivo fuente
+        // Definir la ruta del archivo fuente
         //Path sourcePath = Paths.get(System.getProperty("user.dir"), "smb_copy.conf");
         Path sourcePath = Paths.get("/home/daniel", "smbCopia.conf");
         
@@ -593,9 +612,10 @@ public class Interfaz extends javax.swing.JFrame {
         } catch (IOException e) {
             System.err.println("Error al copiar el archivo: " + e.getMessage());
         }
+        compartir.reiniciarServicioSMB();
         System.exit(0); //Ah si, dijo que no salieramos de la app. toca borrar esto y ver cómo volver
                         //a ejecutar la parte de hacer copia y crear un nuevo compartir que haga todo.
-    }//GEN-LAST:event_botonPrueba2ActionPerformed
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      * @param args the command line arguments
