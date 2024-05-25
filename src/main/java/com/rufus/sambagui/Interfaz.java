@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.rufus.sambagui;
-//implementacion
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 
