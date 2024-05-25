@@ -158,6 +158,9 @@ public class Compartir {
         return smb.get(nombreSeccion);
     }
     
+    public void cambiarSmb(Wini nuevoSmb){ //Este método sólo lo uso para mi botoncito lindo de editar
+        this.smb = nuevoSmb;
+    }
     /*//ESTO DE AQUÍ ES UN EJEMPLO PARA COLOCAR ## Y DESHABILITAR UNA SECCIÓN DEL ARCHIVO. AÚN NO LO PROBÉ.
     public  void inhabilitar() {
         try {

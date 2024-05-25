@@ -1,10 +1,10 @@
 com/rufus/sambagui/Compartir.class
-com/rufus/sambagui/EditarSeccion$4$1.class
 com/rufus/sambagui/Interfaz$4.class
 com/rufus/sambagui/AnadirSeccion$1.class
 com/rufus/sambagui/EditarSeccion$3.class
 com/rufus/sambagui/EditarSeccion.class
 com/rufus/sambagui/AnadirSeccion$3.class
+com/rufus/sambagui/EditarSeccion$5.class
 com/rufus/sambagui/AnadirValor.class
 com/rufus/sambagui/Interfaz$6.class
 com/rufus/sambagui/AnadirValor$4.class
@@ -17,6 +17,7 @@ com/rufus/sambagui/EditarSeccion$1.class
 com/rufus/sambagui/Interfaz$7.class
 module-info.class
 com/rufus/sambagui/Interfaz$9.class
+com/rufus/sambagui/EditarSeccion$6$1.class
 com/rufus/sambagui/Interfaz$10.class
 com/rufus/sambagui/EditarSeccion$4.class
 com/rufus/sambagui/AnadirSeccion$2.class
@@ -24,6 +25,7 @@ com/rufus/sambagui/AnadirValor$1.class
 com/rufus/sambagui/Interfaz$5.class
 com/rufus/sambagui/AnadirSeccion$3$1.class
 com/rufus/sambagui/EditarSeccion$2.class
+com/rufus/sambagui/EditarSeccion$6.class
 com/rufus/sambagui/App.class
 com/rufus/sambagui/AnadirValor$2.class
 com/rufus/sambagui/Interfaz.class

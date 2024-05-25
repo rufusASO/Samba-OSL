@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 public class EditarSeccion extends javax.swing.JDialog {
 
     private Compartir compartir;
-    
+    private boolean confirmarCambios;
     
     
     /**
@@ -33,10 +33,12 @@ public class EditarSeccion extends javax.swing.JDialog {
     }
     
     private void iniciarTabla(String nombreSeccion){
-        nombreRecurso.setText("Recurso " + nombreSeccion);     
+        nombreRecurso.setText("Recurso " + nombreSeccion);  
+        //Compartir me dará los valores de la seccion
         Map<String,String> parValores = compartir.getValoresSeccion(nombreSeccion);
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaOpcion.getModel();
         
+        //Lleno la tabla con esos valores
         if (parValores != null) {
             // Iterar sobre todas las claves y valores en la sección
             for (Map.Entry<String, String> entry : parValores.entrySet()) {
@@ -47,7 +49,9 @@ public class EditarSeccion extends javax.swing.JDialog {
         }
     }
     
-    
+    public boolean taMadreEstoyCansado(){
+        return confirmarCambios;
+    }
     
     
     
@@ -101,7 +105,10 @@ public class EditarSeccion extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        tablaOpcion.setColumnSelectionAllowed(true);
+        tablaOpcion.setCellSelectionEnabled(false);
+        tablaOpcion.setRowSelectionAllowed(true);
+        tablaOpcion.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaOpcion.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaOpcion.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaOpcion);
         tablaOpcion.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -123,8 +130,18 @@ public class EditarSeccion extends javax.swing.JDialog {
         botonDeleteValor.setText("Eliminar");
 
         botonBack.setText("Atrás");
+        botonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBackActionPerformed(evt);
+            }
+        });
 
         botonGuardar.setText("Guardar");
+        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -196,6 +213,16 @@ public class EditarSeccion extends javax.swing.JDialog {
     private void botonEditValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditValorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEditValorActionPerformed
+
+    private void botonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBackActionPerformed
+        confirmarCambios = false;
+        dispose();
+    }//GEN-LAST:event_botonBackActionPerformed
+
+    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
+        confirmarCambios = true;
+        dispose();
+    }//GEN-LAST:event_botonGuardarActionPerformed
 
     /**
      * @param args the command line arguments
