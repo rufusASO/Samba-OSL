@@ -22,6 +22,8 @@ public class Interfaz extends javax.swing.JFrame {
         for(int i = 0; i < shareTable.getColumnModel().getColumnCount(); i++){
             shareTable.getColumnModel().getColumn(i).setResizable(false);
         }
+        winsOptions.add(onSettings);
+        winsOptions.add(offSettings);
     }
 
     /**
@@ -33,6 +35,7 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        winsOptions = new javax.swing.ButtonGroup();
         principalPanel = new javax.swing.JPanel();
         sambaTabs = new javax.swing.JTabbedPane();
         Inicio = new javax.swing.JPanel();
@@ -57,6 +60,11 @@ public class Interfaz extends javax.swing.JFrame {
         onSettings = new javax.swing.JRadioButton();
         offSettings = new javax.swing.JRadioButton();
         Usuarios = new javax.swing.JPanel();
+        userScroll = new javax.swing.JScrollPane();
+        userTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
@@ -323,15 +331,73 @@ public class Interfaz extends javax.swing.JFrame {
 
         Usuarios.setBackground(new java.awt.Color(45, 45, 45));
 
+        userScroll.setBackground(new java.awt.Color(62, 62, 62));
+        userScroll.setForeground(new java.awt.Color(255, 255, 255));
+
+        userTable.setBackground(new java.awt.Color(62, 62, 62));
+        userTable.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        userTable.setForeground(new java.awt.Color(255, 255, 255));
+        userTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Username", "UID", "Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        userScroll.setViewportView(userTable);
+
+        jButton1.setBackground(new java.awt.Color(62, 62, 62));
+        jButton1.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Añadir");
+
+        jButton2.setBackground(new java.awt.Color(62, 62, 62));
+        jButton2.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Editar");
+        jButton2.setPreferredSize(new java.awt.Dimension(80, 25));
+
+        jButton3.setBackground(new java.awt.Color(62, 62, 62));
+        jButton3.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Borrar");
+
         javax.swing.GroupLayout UsuariosLayout = new javax.swing.GroupLayout(Usuarios);
         Usuarios.setLayout(UsuariosLayout);
         UsuariosLayout.setHorizontalGroup(
             UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 894, Short.MAX_VALUE)
+            .addGroup(UsuariosLayout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addComponent(userScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+                .addGroup(UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
+                .addGap(70, 70, 70))
         );
         UsuariosLayout.setVerticalGroup(
             UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 415, Short.MAX_VALUE)
+            .addGroup(UsuariosLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(UsuariosLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3))
+                    .addComponent(userScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         sambaTabs.addTab("Usuarios", Usuarios);
@@ -345,6 +411,11 @@ public class Interfaz extends javax.swing.JFrame {
         cancelButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelButton.setText("Cancelar");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout principalPanelLayout = new javax.swing.GroupLayout(principalPanel);
         principalPanel.setLayout(principalPanelLayout);
@@ -391,6 +462,20 @@ public class Interfaz extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        int result = javax.swing.JOptionPane.showConfirmDialog(
+            null,
+            "¿Estás seguro que deseas cancelar?\nToda la información que se haya agregado, editado o eliminado no se guardará.",
+            "Confirmación",
+            javax.swing.JOptionPane.YES_NO_OPTION
+        );
+
+        if (result == javax.swing.JOptionPane.YES_OPTION) {
+            // Si se presiona "Aceptar", cerrar la ventana
+            dispose();
+        }
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -444,6 +529,9 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel estado;
     private javax.swing.JTextField groupName;
     private javax.swing.JLayeredPane groupSambaName;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JRadioButton offSettings;
     private javax.swing.JRadioButton onSettings;
     private javax.swing.JComboBox<String> opciones1;
@@ -458,6 +546,9 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel titleGroup;
     private javax.swing.JLabel titleServer;
     private javax.swing.JLabel titulo1;
+    private javax.swing.JScrollPane userScroll;
+    private javax.swing.JTable userTable;
+    private javax.swing.ButtonGroup winsOptions;
     private javax.swing.JLayeredPane winsSettings;
     // End of variables declaration//GEN-END:variables
 }
