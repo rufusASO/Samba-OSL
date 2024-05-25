@@ -6,8 +6,6 @@ package com.rufus.sambagui;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -35,15 +33,18 @@ public class Interfaz extends javax.swing.JFrame {
             tablaDatos.getColumnModel().getColumn(i).setResizable(true);
         }   
         
-        //Aquí se crea una copia de smb.conf. Por ahora es mi directorio /hom/daniel
-        crearCopiaSMB();
-        //Ahora se crean los Files
-        smbCopia = new File("./smbCopia.conf");      
         
+        //Los paths
+        directorioCopia = Paths.get("./smbCopia.conf");
+        directorioCopia2 = Paths.get("./smbCopia2.conf");
+        directorioSmb = Paths.get("/etc/samba/smb.conf");
+        //Aquí se crea una copia de smb.conf. Por ahora es mi directorio /hom/daniel
+        crearCopiaSMB(directorioSmb,directorioCopia);
+        //Ahora se crean los Files
+        smbCopia = new File("./smbCopia.conf");  
         //Creo mi clase Compartir que maneja todas las funciones de esta pestaña
         try{
-        Wini wSmbCopia = new Wini(smbCopia);
-        compartir = new Compartir(wSmbCopia);
+        compartir = new Compartir(new Wini(smbCopia));
         }catch(IOException e){
             System.out.println("No se puede crar un WINI smb");
         }
@@ -51,16 +52,8 @@ public class Interfaz extends javax.swing.JFrame {
     }
     
     
-    private void crearCopiaSMB(){
-        // Define la ruta del archivo fuente
-        Path sourcePath = Paths.get("/etc/samba/smb.conf");
-
-        // Define la ruta del archivo destino en el directorio de ejecución de la aplicación
-        //Path destinationPath = Paths.get(System.getProperty("user.dir"), "smb_copy.conf");
-        Path destinationPath = Paths.get(".","smbCopia.conf");
-        System.out.println("Path del lugar al que quiero copiar: " + destinationPath);
+    private void crearCopiaSMB(Path sourcePath, Path destinationPath){
         try {
-            // Copia el archivo
             // Usa REPLACE_EXISTING para sobrescribir el archivo destino si ya existe
             Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
@@ -68,9 +61,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
         
     }
-    private void eliminarCopiaSmb(){
-        Path pathToDelete = Paths.get(".", "smbCopia.conf");
-
+    private void eliminarCopiaSmb(Path pathToDelete){
         try {
             // Elimina el archivo
             Files.delete(pathToDelete);
@@ -84,14 +75,7 @@ public class Interfaz extends javax.swing.JFrame {
             }
         }
     }
-    private void guardarCopiaSmb(){
-        // Definir la ruta del archivo fuente
-        //Path sourcePath = Paths.get(System.getProperty("user.dir"), "smb_copy.conf");
-        Path sourcePath = Paths.get(".", "smbCopia.conf");
-        
-        // Definir la ruta del archivo destino en otro directorio
-        Path destinationPath = Paths.get("/etc/samba","smb.conf");
-
+    private void guardarCopiaSmb(Path sourcePath, Path destinationPath){
         try {
             // Copiar el archivo desde la ruta de origen a la ruta de destino
             // Usa REPLACE_EXISTING para sobrescribir el archivo destino si ya existe
@@ -610,17 +594,25 @@ public class Interfaz extends javax.swing.JFrame {
                 System.err.println("Error al cambiar al SMB TEMPORAL");
             }
             
-            //Se crea un formulario de llenado
-            String seccionAEditar = (String) tablaDatos.getValueAt(tablaDatos.getSelectedRow(), 2);
-            EditarSeccion editarSeccion = new EditarSeccion(this, true);
-            editarSeccion.inicializar(compartir, seccionAEditar);
+            String seccionAEditar = (String) tablaDatos.getValueAt(tablaDatos.getSelectedRow(), 2); //Qué seccion edito
+            EditarSeccion editarSeccion = new EditarSeccion(this, true); //creo el formulario
+            editarSeccion.inicializar(compartir, seccionAEditar); //inicialización del formulario
             editarSeccion.setVisible(true);
             if(editarSeccion.taMadreEstoyCansado()){
                 System.out.println("Se Confirmaron cambios, toca guardar la copia2");
+                guardarCopiaSmb(directorioCopia2,directorioCopia);
             }else{
                 System.out.println("Se descartaron cambios, toca eliminar la copia2 sin guardar");
+                eliminarCopiaSmb(directorioCopia2);
             }
             
+            //Vuelvo a cambiar el Smb que manejará el compartir al smb Copia 1
+            try{
+            Wini smbTemporal = new Wini(new File("./smbCopia.conf"));
+            compartir.cambiarSmb(smbTemporal);
+            }catch(IOException e){
+                System.err.println("Error al cambiar al SMB Copia");
+            }
         }
         
         
@@ -641,14 +633,14 @@ public class Interfaz extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         //DESCARTAMOS cambios solamente con borrar el archivo smbCopia y cerrar aplicación.
         // Definir la ruta del archivo a eliminar
-        eliminarCopiaSmb();
+        eliminarCopiaSmb(directorioCopia);
         compartir.reiniciarServicioSMB();
         System.exit(0);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         //Esto confirma los cambios, por lo tanto se copia y reemplaza del smbCopia.conf al smb.conf original.
-        guardarCopiaSmb();
+        guardarCopiaSmb(directorioCopia,directorioSmb);
         compartir.reiniciarServicioSMB();
         System.exit(0); //Ah si, dijo que no salieramos de la app. toca borrar esto y ver cómo volver
                         //a ejecutar la parte de hacer copia y crear un nuevo compartir que haga todo.
@@ -724,5 +716,7 @@ public class Interfaz extends javax.swing.JFrame {
     //aqui va mi la instancia de mi clase que hará todo las funciones de mi respectiva pestaña (DANIEL)
     Compartir compartir;   
     File smbCopia;
-    
+    Path directorioCopia;
+    Path directorioCopia2;
+    Path directorioSmb;
 }

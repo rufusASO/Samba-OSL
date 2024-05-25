@@ -15,7 +15,7 @@ public class EditarSeccion extends javax.swing.JDialog {
 
     private Compartir compartir;
     private boolean confirmarCambios;
-    
+    private String seccionEditandose;
     
     /**
      * Creates new form Editar
@@ -29,7 +29,8 @@ public class EditarSeccion extends javax.swing.JDialog {
 
     public void inicializar(Compartir compartir, String seccionAEditar){
         this.compartir = compartir;
-        iniciarTabla(seccionAEditar);
+        seccionEditandose = seccionAEditar;
+        iniciarTabla(seccionEditandose);
     }
     
     private void iniciarTabla(String nombreSeccion){
@@ -128,6 +129,11 @@ public class EditarSeccion extends javax.swing.JDialog {
         });
 
         botonDeleteValor.setText("Eliminar");
+        botonDeleteValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonDeleteValorActionPerformed(evt);
+            }
+        });
 
         botonBack.setText("Atrás");
         botonBack.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +217,10 @@ public class EditarSeccion extends javax.swing.JDialog {
     }//GEN-LAST:event_botonAddValorActionPerformed
 
     private void botonEditValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditValorActionPerformed
-        // TODO add your handling code here:
+        if(tablaOpcion.getSelectedRow() != -1){
+            String editandoOpcion = (String) tablaOpcion.getValueAt(tablaOpcion.getSelectedRow(), 0);
+            System.out.println("Editando la Opcion : " + editandoOpcion);
+        }
     }//GEN-LAST:event_botonEditValorActionPerformed
 
     private void botonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBackActionPerformed
@@ -223,6 +232,13 @@ public class EditarSeccion extends javax.swing.JDialog {
         confirmarCambios = true;
         dispose();
     }//GEN-LAST:event_botonGuardarActionPerformed
+
+    private void botonDeleteValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDeleteValorActionPerformed
+        if(tablaOpcion.getSelectedRow() != -1){
+            String editandoOpcion = (String) tablaOpcion.getValueAt(tablaOpcion.getSelectedRow(), 0);
+            compartir.deleteValor(seccionEditandose, editandoOpcion);
+        }
+    }//GEN-LAST:event_botonDeleteValorActionPerformed
 
     /**
      * @param args the command line arguments

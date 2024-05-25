@@ -109,7 +109,14 @@ public class Compartir {
             path : /home/luissmb/creadoPorLuis
             
     */
-    
+    public void deleteValor(String seccion, String opcion){
+        try{
+            smb.remove(seccion, opcion);
+            smb.store();
+        }catch(IOException e){
+            System.out.println("No se pudo borrar la Opción: "+opcion);
+        }
+    }
     
     
     public void reiniciarServicioSMB(){
