@@ -4,6 +4,7 @@
  */
 package com.rufus.sambagui;
 //implementacion
+import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 
 /**
@@ -17,13 +18,18 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
-        JTableHeader header = shareTable.getTableHeader();
-        header.setReorderingAllowed(false);
-        for(int i = 0; i < shareTable.getColumnModel().getColumnCount(); i++){
-            shareTable.getColumnModel().getColumn(i).setResizable(false);
-        }
+        configureTable(shareTable);
+        configureTable(userTable);
         winsOptions.add(onSettings);
         winsOptions.add(offSettings);
+    }
+    
+    public static void configureTable(JTable table) {
+        JTableHeader header = table.getTableHeader();
+        header.setReorderingAllowed(false);
+        for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setResizable(false);
+        }
     }
 
     /**
