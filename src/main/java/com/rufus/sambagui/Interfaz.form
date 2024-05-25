@@ -33,19 +33,19 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="panelPrincipal" min="-2" max="-2" attributes="0"/>
+              <Component id="principalPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelPrincipal" alignment="1" max="32767" attributes="0"/>
+          <Component id="principalPanel" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="panelPrincipal">
+    <Container class="javax.swing.JPanel" name="principalPanel">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="1e" green="1e" red="1e" type="rgb"/>
@@ -67,7 +67,7 @@
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="Pestanias" max="32767" attributes="0"/>
+                      <Component id="sambaTabs" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -86,7 +86,7 @@
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="Pestanias" min="-2" pref="450" max="-2" attributes="0"/>
+                      <Component id="sambaTabs" min="-2" pref="450" max="-2" attributes="0"/>
                       <EmptySpace pref="144" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -94,7 +94,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JTabbedPane" name="Pestanias">
+        <Container class="javax.swing.JTabbedPane" name="sambaTabs">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="1e" green="1e" red="1e" type="rgb"/>
@@ -281,12 +281,12 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="tabScroll" min="-2" pref="670" max="-2" attributes="0"/>
+                          <Component id="shareScroll" min="-2" pref="670" max="-2" attributes="0"/>
                           <EmptySpace pref="51" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="editButton" max="32767" attributes="0"/>
-                              <Component id="deleteButton" max="32767" attributes="0"/>
-                              <Component id="addButton" alignment="0" max="32767" attributes="0"/>
+                              <Component id="editShareButton" max="32767" attributes="0"/>
+                              <Component id="deleteShareButton" max="32767" attributes="0"/>
+                              <Component id="addShareButton" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
@@ -298,13 +298,13 @@
                           <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="addButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="addShareButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="editButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="editShareButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="deleteShareButton" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="tabScroll" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="shareScroll" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="155" max="32767" attributes="0"/>
                       </Group>
@@ -312,7 +312,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="tabScroll">
+                <Container class="javax.swing.JScrollPane" name="shareScroll">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="3e" green="3e" red="3e" type="rgb"/>
@@ -324,7 +324,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="tabShare">
+                    <Component class="javax.swing.JTable" name="shareTable">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="3e" green="3e" red="3e" type="rgb"/>
@@ -336,25 +336,57 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="6" rowCount="4">
-                            <Column editable="false" title="Status" type="java.lang.String">
-                              <Data value="Enabled"/>
-                              <Data value="Enabled"/>
-                              <Data value="Enabled"/>
-                              <Data value="Enabled"/>
-                            </Column>
-                            <Column editable="false" title="Read-Only" type="java.lang.String"/>
-                            <Column editable="false" title="Name" type="java.lang.String"/>
-                            <Column editable="false" title="Path" type="java.lang.String"/>
-                            <Column editable="false" title="Guest Acces" type="java.lang.String"/>
-                            <Column editable="false" title="Comment" type="java.lang.String"/>
+                          <Table columnCount="6" rowCount="0">
+                            <Column editable="true" title="Status" type="java.lang.String"/>
+                            <Column editable="true" title="Read-Only" type="java.lang.String"/>
+                            <Column editable="true" title="Name" type="java.lang.String"/>
+                            <Column editable="true" title="Path" type="java.lang.String"/>
+                            <Column editable="true" title="Guest Acces" type="java.lang.String"/>
+                            <Column editable="true" title="Comment" type="java.lang.String"/>
                           </Table>
+                        </Property>
+                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                          <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                          </TableColumnModel>
+                        </Property>
+                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                          <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="addButton">
+                <Component class="javax.swing.JButton" name="addShareButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="3e" green="3e" red="3e" type="rgb"/>
@@ -368,7 +400,7 @@
                     <Property name="text" type="java.lang.String" value="A&#xf1;adir"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="editButton">
+                <Component class="javax.swing.JButton" name="editShareButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="3e" green="3e" red="3e" type="rgb"/>
@@ -382,7 +414,7 @@
                     <Property name="text" type="java.lang.String" value="Editar"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="deleteButton">
+                <Component class="javax.swing.JButton" name="deleteShareButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="3e" green="3e" red="3e" type="rgb"/>
@@ -417,10 +449,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="groupSetting" min="-2" max="-2" attributes="0"/>
+                          <Component id="groupSambaName" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                          <Component id="serverSettings" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="99" max="32767" attributes="0"/>
+                          <Component id="winsSettings" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="222" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -429,8 +461,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="serverSettings" min="-2" max="-2" attributes="0"/>
-                              <Component id="groupSetting" min="-2" max="-2" attributes="0"/>
+                              <Component id="winsSettings" min="-2" max="-2" attributes="0"/>
+                              <Component id="groupSambaName" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="252" max="32767" attributes="0"/>
                       </Group>
@@ -438,7 +470,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JLayeredPane" name="groupSetting">
+                <Container class="javax.swing.JLayeredPane" name="groupSambaName">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -510,7 +542,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JLayeredPane" name="serverSettings">
+                <Container class="javax.swing.JLayeredPane" name="winsSettings">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -525,20 +557,17 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="offSettings" min="-2" max="-2" attributes="0"/>
-                                          <Component id="onSettings" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
-                                      <Component id="titleServer" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="offSettings" min="-2" max="-2" attributes="0"/>
+                                  <Component id="onSettings" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="19" max="32767" attributes="0"/>
+                              <EmptySpace pref="97" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="titleServer" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -579,7 +608,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Compatibilidad con servidores WINS"/>
+                        <Property name="text" type="java.lang.String" value="Encendido"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="offSettings">
@@ -593,7 +622,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Servidor WINS remoto"/>
+                        <Property name="text" type="java.lang.String" value="Apagado"/>
                       </Properties>
                     </Component>
                   </SubComponents>

@@ -17,10 +17,10 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
-        JTableHeader header = tabShare.getTableHeader();
+        JTableHeader header = shareTable.getTableHeader();
         header.setReorderingAllowed(false);
-        for(int i = 0; i < tabShare.getColumnModel().getColumnCount(); i++){
-            tabShare.getColumnModel().getColumn(i).setResizable(false);
+        for(int i = 0; i < shareTable.getColumnModel().getColumnCount(); i++){
+            shareTable.getColumnModel().getColumn(i).setResizable(false);
         }
     }
 
@@ -33,8 +33,8 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelPrincipal = new javax.swing.JPanel();
-        Pestanias = new javax.swing.JTabbedPane();
+        principalPanel = new javax.swing.JPanel();
+        sambaTabs = new javax.swing.JTabbedPane();
         Inicio = new javax.swing.JPanel();
         titulo1 = new javax.swing.JLabel();
         estado = new javax.swing.JLabel();
@@ -43,16 +43,16 @@ public class Interfaz extends javax.swing.JFrame {
         subtitulo2 = new javax.swing.JLabel();
         opciones2 = new javax.swing.JComboBox<>();
         Compartir = new javax.swing.JPanel();
-        tabScroll = new javax.swing.JScrollPane();
-        tabShare = new javax.swing.JTable();
-        addButton = new javax.swing.JButton();
-        editButton = new javax.swing.JButton();
-        deleteButton = new javax.swing.JButton();
+        shareScroll = new javax.swing.JScrollPane();
+        shareTable = new javax.swing.JTable();
+        addShareButton = new javax.swing.JButton();
+        editShareButton = new javax.swing.JButton();
+        deleteShareButton = new javax.swing.JButton();
         Trabajo = new javax.swing.JPanel();
-        groupSetting = new javax.swing.JLayeredPane();
+        groupSambaName = new javax.swing.JLayeredPane();
         titleGroup = new javax.swing.JLabel();
         groupName = new javax.swing.JTextField();
-        serverSettings = new javax.swing.JLayeredPane();
+        winsSettings = new javax.swing.JLayeredPane();
         titleServer = new javax.swing.JLabel();
         onSettings = new javax.swing.JRadioButton();
         offSettings = new javax.swing.JRadioButton();
@@ -65,11 +65,11 @@ public class Interfaz extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(900, 600));
 
-        panelPrincipal.setBackground(new java.awt.Color(30, 30, 30));
-        panelPrincipal.setPreferredSize(new java.awt.Dimension(900, 600));
+        principalPanel.setBackground(new java.awt.Color(30, 30, 30));
+        principalPanel.setPreferredSize(new java.awt.Dimension(900, 600));
 
-        Pestanias.setBackground(new java.awt.Color(30, 30, 30));
-        Pestanias.setForeground(new java.awt.Color(255, 255, 255));
+        sambaTabs.setBackground(new java.awt.Color(30, 30, 30));
+        sambaTabs.setForeground(new java.awt.Color(255, 255, 255));
 
         Inicio.setBackground(new java.awt.Color(45, 45, 45));
 
@@ -136,22 +136,19 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap(187, Short.MAX_VALUE))
         );
 
-        Pestanias.addTab("Inicio", Inicio);
+        sambaTabs.addTab("Inicio", Inicio);
 
         Compartir.setBackground(new java.awt.Color(45, 45, 45));
 
-        tabScroll.setBackground(new java.awt.Color(62, 62, 62));
-        tabScroll.setForeground(new java.awt.Color(255, 255, 255));
+        shareScroll.setBackground(new java.awt.Color(62, 62, 62));
+        shareScroll.setForeground(new java.awt.Color(255, 255, 255));
 
-        tabShare.setBackground(new java.awt.Color(62, 62, 62));
-        tabShare.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
-        tabShare.setForeground(new java.awt.Color(255, 255, 255));
-        tabShare.setModel(new javax.swing.table.DefaultTableModel(
+        shareTable.setBackground(new java.awt.Color(62, 62, 62));
+        shareTable.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        shareTable.setForeground(new java.awt.Color(255, 255, 255));
+        shareTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Enabled", null, null, null, null, null},
-                {"Enabled", null, null, null, null, null},
-                {"Enabled", null, null, null, null, null},
-                {"Enabled", null, null, null, null, null}
+
             },
             new String [] {
                 "Status", "Read-Only", "Name", "Path", "Guest Acces", "Comment"
@@ -160,34 +157,27 @@ public class Interfaz extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
         });
-        tabScroll.setViewportView(tabShare);
+        shareScroll.setViewportView(shareTable);
 
-        addButton.setBackground(new java.awt.Color(62, 62, 62));
-        addButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
-        addButton.setForeground(new java.awt.Color(255, 255, 255));
-        addButton.setText("Añadir");
+        addShareButton.setBackground(new java.awt.Color(62, 62, 62));
+        addShareButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        addShareButton.setForeground(new java.awt.Color(255, 255, 255));
+        addShareButton.setText("Añadir");
 
-        editButton.setBackground(new java.awt.Color(62, 62, 62));
-        editButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
-        editButton.setForeground(new java.awt.Color(255, 255, 255));
-        editButton.setText("Editar");
+        editShareButton.setBackground(new java.awt.Color(62, 62, 62));
+        editShareButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        editShareButton.setForeground(new java.awt.Color(255, 255, 255));
+        editShareButton.setText("Editar");
 
-        deleteButton.setBackground(new java.awt.Color(62, 62, 62));
-        deleteButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
-        deleteButton.setForeground(new java.awt.Color(255, 255, 255));
-        deleteButton.setText("Borrar");
+        deleteShareButton.setBackground(new java.awt.Color(62, 62, 62));
+        deleteShareButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        deleteShareButton.setForeground(new java.awt.Color(255, 255, 255));
+        deleteShareButton.setText("Borrar");
 
         javax.swing.GroupLayout CompartirLayout = new javax.swing.GroupLayout(Compartir);
         Compartir.setLayout(CompartirLayout);
@@ -195,12 +185,12 @@ public class Interfaz extends javax.swing.JFrame {
             CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CompartirLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addComponent(tabScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(shareScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(editShareButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteShareButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addShareButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(32, 32, 32))
         );
         CompartirLayout.setVerticalGroup(
@@ -209,21 +199,21 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGap(60, 60, 60)
                 .addGroup(CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CompartirLayout.createSequentialGroup()
-                        .addComponent(addButton)
+                        .addComponent(addShareButton)
                         .addGap(18, 18, 18)
-                        .addComponent(editButton)
+                        .addComponent(editShareButton)
                         .addGap(18, 18, 18)
-                        .addComponent(deleteButton))
-                    .addComponent(tabScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(deleteShareButton))
+                    .addComponent(shareScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(155, Short.MAX_VALUE))
         );
 
-        Pestanias.addTab("Compartir", Compartir);
+        sambaTabs.addTab("Compartir", Compartir);
 
         Trabajo.setBackground(new java.awt.Color(45, 45, 45));
 
-        groupSetting.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
-        groupSetting.setPreferredSize(new java.awt.Dimension(300, 100));
+        groupSambaName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        groupSambaName.setPreferredSize(new java.awt.Dimension(300, 100));
 
         titleGroup.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         titleGroup.setForeground(new java.awt.Color(255, 255, 255));
@@ -234,26 +224,26 @@ public class Interfaz extends javax.swing.JFrame {
         groupName.setForeground(new java.awt.Color(255, 255, 255));
         groupName.setText("WORKGROUP");
 
-        groupSetting.setLayer(titleGroup, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        groupSetting.setLayer(groupName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        groupSambaName.setLayer(titleGroup, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        groupSambaName.setLayer(groupName, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout groupSettingLayout = new javax.swing.GroupLayout(groupSetting);
-        groupSetting.setLayout(groupSettingLayout);
-        groupSettingLayout.setHorizontalGroup(
-            groupSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(groupSettingLayout.createSequentialGroup()
-                .addGroup(groupSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(groupSettingLayout.createSequentialGroup()
+        javax.swing.GroupLayout groupSambaNameLayout = new javax.swing.GroupLayout(groupSambaName);
+        groupSambaName.setLayout(groupSambaNameLayout);
+        groupSambaNameLayout.setHorizontalGroup(
+            groupSambaNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(groupSambaNameLayout.createSequentialGroup()
+                .addGroup(groupSambaNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(groupSambaNameLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(groupName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(groupSettingLayout.createSequentialGroup()
+                    .addGroup(groupSambaNameLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(titleGroup)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
-        groupSettingLayout.setVerticalGroup(
-            groupSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(groupSettingLayout.createSequentialGroup()
+        groupSambaNameLayout.setVerticalGroup(
+            groupSambaNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(groupSambaNameLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleGroup)
                 .addGap(18, 18, 18)
@@ -261,7 +251,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        serverSettings.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        winsSettings.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
 
         titleServer.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         titleServer.setForeground(new java.awt.Color(255, 255, 255));
@@ -270,36 +260,35 @@ public class Interfaz extends javax.swing.JFrame {
         onSettings.setBackground(new java.awt.Color(45, 45, 45));
         onSettings.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         onSettings.setForeground(new java.awt.Color(255, 255, 255));
-        onSettings.setText("Compatibilidad con servidores WINS");
+        onSettings.setText("Encendido");
 
         offSettings.setBackground(new java.awt.Color(45, 45, 45));
         offSettings.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         offSettings.setForeground(new java.awt.Color(255, 255, 255));
-        offSettings.setText("Servidor WINS remoto");
+        offSettings.setText("Apagado");
 
-        serverSettings.setLayer(titleServer, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        serverSettings.setLayer(onSettings, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        serverSettings.setLayer(offSettings, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        winsSettings.setLayer(titleServer, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        winsSettings.setLayer(onSettings, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        winsSettings.setLayer(offSettings, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout serverSettingsLayout = new javax.swing.GroupLayout(serverSettings);
-        serverSettings.setLayout(serverSettingsLayout);
-        serverSettingsLayout.setHorizontalGroup(
-            serverSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(serverSettingsLayout.createSequentialGroup()
-                .addGroup(serverSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(serverSettingsLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(serverSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(offSettings)
-                            .addComponent(onSettings)))
-                    .addGroup(serverSettingsLayout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(titleServer)))
-                .addContainerGap(19, Short.MAX_VALUE))
+        javax.swing.GroupLayout winsSettingsLayout = new javax.swing.GroupLayout(winsSettings);
+        winsSettings.setLayout(winsSettingsLayout);
+        winsSettingsLayout.setHorizontalGroup(
+            winsSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(winsSettingsLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(winsSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(offSettings)
+                    .addComponent(onSettings))
+                .addContainerGap(97, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, winsSettingsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titleServer)
+                .addGap(80, 80, 80))
         );
-        serverSettingsLayout.setVerticalGroup(
-            serverSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(serverSettingsLayout.createSequentialGroup()
+        winsSettingsLayout.setVerticalGroup(
+            winsSettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(winsSettingsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleServer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -315,22 +304,22 @@ public class Interfaz extends javax.swing.JFrame {
             TrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TrabajoLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(groupSetting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(groupSambaName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(113, 113, 113)
-                .addComponent(serverSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addComponent(winsSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         TrabajoLayout.setVerticalGroup(
             TrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TrabajoLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addGroup(TrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(serverSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(groupSetting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(winsSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(groupSambaName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(252, Short.MAX_VALUE))
         );
 
-        Pestanias.addTab("Trabajo", Trabajo);
+        sambaTabs.addTab("Trabajo", Trabajo);
 
         Usuarios.setBackground(new java.awt.Color(45, 45, 45));
 
@@ -345,7 +334,7 @@ public class Interfaz extends javax.swing.JFrame {
             .addGap(0, 415, Short.MAX_VALUE)
         );
 
-        Pestanias.addTab("Usuarios", Usuarios);
+        sambaTabs.addTab("Usuarios", Usuarios);
 
         saveButton.setBackground(new java.awt.Color(62, 62, 62));
         saveButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
@@ -357,33 +346,33 @@ public class Interfaz extends javax.swing.JFrame {
         cancelButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelButton.setText("Cancelar");
 
-        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
-        panelPrincipal.setLayout(panelPrincipalLayout);
-        panelPrincipalLayout.setHorizontalGroup(
-            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+        javax.swing.GroupLayout principalPanelLayout = new javax.swing.GroupLayout(principalPanel);
+        principalPanel.setLayout(principalPanelLayout);
+        principalPanelLayout.setHorizontalGroup(
+            principalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalPanelLayout.createSequentialGroup()
                 .addContainerGap(638, Short.MAX_VALUE)
                 .addComponent(cancelButton)
                 .addGap(40, 40, 40)
                 .addComponent(saveButton)
                 .addGap(31, 31, 31))
-            .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelPrincipalLayout.createSequentialGroup()
-                    .addComponent(Pestanias)
+            .addGroup(principalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(principalPanelLayout.createSequentialGroup()
+                    .addComponent(sambaTabs)
                     .addContainerGap()))
         );
-        panelPrincipalLayout.setVerticalGroup(
-            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+        principalPanelLayout.setVerticalGroup(
+            principalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalPanelLayout.createSequentialGroup()
                 .addContainerGap(525, Short.MAX_VALUE)
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(principalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
                     .addComponent(saveButton))
                 .addGap(50, 50, 50))
-            .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelPrincipalLayout.createSequentialGroup()
+            .addGroup(principalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(principalPanelLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(Pestanias, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sambaTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(144, Short.MAX_VALUE)))
         );
 
@@ -392,12 +381,12 @@ public class Interfaz extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(principalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(principalPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -431,39 +420,44 @@ public class Interfaz extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Interfaz().setVisible(true);
             }
-        });
+        });*/
+        java.awt.EventQueue.invokeLater(() -> {
+        Interfaz interfaz = new Interfaz();
+        interfaz.setLocationRelativeTo(null); // Centrar la ventana en la pantalla
+        interfaz.setVisible(true);
+    });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Compartir;
     private javax.swing.JPanel Inicio;
-    private javax.swing.JTabbedPane Pestanias;
     private javax.swing.JPanel Trabajo;
     private javax.swing.JPanel Usuarios;
-    private javax.swing.JButton addButton;
+    private javax.swing.JButton addShareButton;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JButton deleteButton;
-    private javax.swing.JButton editButton;
+    private javax.swing.JButton deleteShareButton;
+    private javax.swing.JButton editShareButton;
     private javax.swing.JLabel estado;
     private javax.swing.JTextField groupName;
-    private javax.swing.JLayeredPane groupSetting;
+    private javax.swing.JLayeredPane groupSambaName;
     private javax.swing.JRadioButton offSettings;
     private javax.swing.JRadioButton onSettings;
     private javax.swing.JComboBox<String> opciones1;
     private javax.swing.JComboBox<String> opciones2;
-    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel principalPanel;
+    private javax.swing.JTabbedPane sambaTabs;
     private javax.swing.JButton saveButton;
-    private javax.swing.JLayeredPane serverSettings;
+    private javax.swing.JScrollPane shareScroll;
+    private javax.swing.JTable shareTable;
     private javax.swing.JLabel subtitulo1;
     private javax.swing.JLabel subtitulo2;
-    private javax.swing.JScrollPane tabScroll;
-    private javax.swing.JTable tabShare;
     private javax.swing.JLabel titleGroup;
     private javax.swing.JLabel titleServer;
     private javax.swing.JLabel titulo1;
+    private javax.swing.JLayeredPane winsSettings;
     // End of variables declaration//GEN-END:variables
 }
