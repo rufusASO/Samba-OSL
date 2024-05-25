@@ -67,9 +67,9 @@ public class Interfaz extends javax.swing.JFrame {
         Usuarios = new javax.swing.JPanel();
         userScroll = new javax.swing.JScrollPane();
         userTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        addUserButton = new javax.swing.JButton();
+        editUserButton = new javax.swing.JButton();
+        deleteUserButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
@@ -181,6 +181,11 @@ public class Interfaz extends javax.swing.JFrame {
         addShareButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         addShareButton.setForeground(new java.awt.Color(255, 255, 255));
         addShareButton.setText("Añadir");
+        addShareButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addShareButtonActionPerformed(evt);
+            }
+        });
 
         editShareButton.setBackground(new java.awt.Color(62, 62, 62));
         editShareButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
@@ -360,21 +365,26 @@ public class Interfaz extends javax.swing.JFrame {
         });
         userScroll.setViewportView(userTable);
 
-        jButton1.setBackground(new java.awt.Color(62, 62, 62));
-        jButton1.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Añadir");
+        addUserButton.setBackground(new java.awt.Color(62, 62, 62));
+        addUserButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        addUserButton.setForeground(new java.awt.Color(255, 255, 255));
+        addUserButton.setText("Añadir");
+        addUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUserButtonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(62, 62, 62));
-        jButton2.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Editar");
-        jButton2.setPreferredSize(new java.awt.Dimension(80, 25));
+        editUserButton.setBackground(new java.awt.Color(62, 62, 62));
+        editUserButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        editUserButton.setForeground(new java.awt.Color(255, 255, 255));
+        editUserButton.setText("Editar");
+        editUserButton.setPreferredSize(new java.awt.Dimension(80, 25));
 
-        jButton3.setBackground(new java.awt.Color(62, 62, 62));
-        jButton3.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Borrar");
+        deleteUserButton.setBackground(new java.awt.Color(62, 62, 62));
+        deleteUserButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        deleteUserButton.setForeground(new java.awt.Color(255, 255, 255));
+        deleteUserButton.setText("Borrar");
 
         javax.swing.GroupLayout UsuariosLayout = new javax.swing.GroupLayout(Usuarios);
         Usuarios.setLayout(UsuariosLayout);
@@ -385,9 +395,9 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(userScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                 .addGroup(UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(addUserButton)
+                    .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteUserButton))
                 .addGap(70, 70, 70))
         );
         UsuariosLayout.setVerticalGroup(
@@ -396,11 +406,11 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addGroup(UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(UsuariosLayout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(addUserButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3))
+                        .addComponent(deleteUserButton))
                     .addComponent(userScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(160, Short.MAX_VALUE))
         );
@@ -482,6 +492,18 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
+        userFormAdd userFormAdd = new userFormAdd(this, true);
+        userFormAdd.setLocationRelativeTo(null);
+        userFormAdd.setVisible(true);
+    }//GEN-LAST:event_addUserButtonActionPerformed
+
+    private void addShareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addShareButtonActionPerformed
+        shareFormAdd shareFormAdd = new shareFormAdd(this, true);
+        shareFormAdd.setLocationRelativeTo(null);
+        shareFormAdd.setVisible(true);
+    }//GEN-LAST:event_addShareButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -528,15 +550,15 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel Trabajo;
     private javax.swing.JPanel Usuarios;
     private javax.swing.JButton addShareButton;
+    private javax.swing.JButton addUserButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton deleteShareButton;
+    private javax.swing.JButton deleteUserButton;
     private javax.swing.JButton editShareButton;
+    private javax.swing.JButton editUserButton;
     private javax.swing.JLabel estado;
     private javax.swing.JTextField groupName;
     private javax.swing.JLayeredPane groupSambaName;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JRadioButton offSettings;
     private javax.swing.JRadioButton onSettings;
     private javax.swing.JComboBox<String> opciones1;
