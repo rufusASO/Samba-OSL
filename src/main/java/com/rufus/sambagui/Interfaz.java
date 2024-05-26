@@ -3,8 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.rufus.sambagui;
+
 //implementacion
+
+
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 import javax.swing.table.JTableHeader;
+import org.ini4j.Wini;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 /**
  *
@@ -17,12 +30,88 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
-        JTableHeader header = tabShare.getTableHeader();
+        
+        JTableHeader header = tablaDatos.getTableHeader();
         header.setReorderingAllowed(false);
-        for(int i = 0; i < tabShare.getColumnModel().getColumnCount(); i++){
-            tabShare.getColumnModel().getColumn(i).setResizable(false);
+        for(int i = 0; i < tablaDatos.getColumnModel().getColumnCount(); i++){
+            tablaDatos.getColumnModel().getColumn(i).setResizable(true);
+        }   
+        
+        
+        //Los paths
+        directorioCopia = Paths.get("./smbCopia.conf");
+        directorioCopia2 = Paths.get("./smbCopia2.conf");
+        directorioSmb = Paths.get("/etc/samba/smb.conf");
+        //Aquí se crea una copia de smb.conf. Por ahora es mi directorio /hom/daniel
+        crearCopiaSMB(directorioSmb,directorioCopia);
+        //Ahora se crean los Files
+        smbCopia = new File("./smbCopia.conf");  
+        //Creo mi clase Compartir que maneja todas las funciones de esta pestaña
+        try{
+        compartir = new Compartir(new Wini(smbCopia));
+        }catch(IOException e){
+            System.out.println("No se puede crar un WINI smb");
+        }
+        //Se llena la tabla de compartir
+        compartir.leerSmb((DefaultTableModel) tablaDatos.getModel());
+        
+    }
+    
+    
+    private void crearCopiaSMB(Path sourcePath, Path destinationPath){
+        try {
+            // Usa REPLACE_EXISTING para sobrescribir el archivo destino si ya existe
+            Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.err.println("Error al copiar el archivo: " + e.getMessage());
+        }
+        
+    }
+    private void eliminarCopiaSmb(Path pathToDelete){
+        try {
+            // Elimina el archivo
+            Files.delete(pathToDelete);
+            System.out.println("Archivo eliminado exitosamente.");
+
+        } catch (IOException e) {
+            System.err.println("Error al eliminar el archivo: " + e.getMessage());
+            // Manejar específicamente la situación cuando el archivo no existe
+            if (Files.notExists(pathToDelete)) {
+                System.err.println("El archivo no existe.");
+            }
         }
     }
+    private void guardarCopiaSmb(Path sourcePath, Path destinationPath){
+        try {
+            // Copiar el archivo desde la ruta de origen a la ruta de destino
+            // Usa REPLACE_EXISTING para sobrescribir el archivo destino si ya existe
+            Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Archivo copiado exitosamente a: " + destinationPath);
+            
+            //Ahora borro el temporal
+            Files.delete(sourcePath);
+        } catch (IOException e) {
+            System.err.println("Error al copiar el archivo: " + e.getMessage());
+        }
+    }
+    
+    public void removerDatosTabla(){
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaDatos.getModel();
+        int i = 0;
+        int j = modeloTabla.getRowCount();
+        while(i < j){
+            modeloTabla.removeRow(0);
+            i++;
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,8 +132,8 @@ public class Interfaz extends javax.swing.JFrame {
         subtitulo2 = new javax.swing.JLabel();
         opciones2 = new javax.swing.JComboBox<>();
         Compartir = new javax.swing.JPanel();
-        tabScroll = new javax.swing.JScrollPane();
-        tabShare = new javax.swing.JTable();
+        tablaTitulos = new javax.swing.JScrollPane();
+        tablaDatos = new javax.swing.JTable();
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
@@ -63,7 +152,6 @@ public class Interfaz extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(30, 30, 30));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(900, 600));
 
         panelPrincipal.setBackground(new java.awt.Color(30, 30, 30));
         panelPrincipal.setPreferredSize(new java.awt.Dimension(900, 600));
@@ -140,18 +228,15 @@ public class Interfaz extends javax.swing.JFrame {
 
         Compartir.setBackground(new java.awt.Color(45, 45, 45));
 
-        tabScroll.setBackground(new java.awt.Color(62, 62, 62));
-        tabScroll.setForeground(new java.awt.Color(255, 255, 255));
+        tablaTitulos.setBackground(new java.awt.Color(62, 62, 62));
+        tablaTitulos.setForeground(new java.awt.Color(255, 255, 255));
 
-        tabShare.setBackground(new java.awt.Color(62, 62, 62));
-        tabShare.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
-        tabShare.setForeground(new java.awt.Color(255, 255, 255));
-        tabShare.setModel(new javax.swing.table.DefaultTableModel(
+        tablaDatos.setBackground(new java.awt.Color(62, 62, 62));
+        tablaDatos.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        tablaDatos.setForeground(new java.awt.Color(255, 255, 255));
+        tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Enabled", null, null, null, null, null},
-                {"Enabled", null, null, null, null, null},
-                {"Enabled", null, null, null, null, null},
-                {"Enabled", null, null, null, null, null}
+
             },
             new String [] {
                 "Status", "Read-Only", "Name", "Path", "Guest Acces", "Comment"
@@ -172,31 +257,47 @@ public class Interfaz extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabScroll.setViewportView(tabShare);
+        tablaDatos.setRowHeight(30);
+        tablaTitulos.setViewportView(tablaDatos);
 
         addButton.setBackground(new java.awt.Color(62, 62, 62));
         addButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         addButton.setForeground(new java.awt.Color(255, 255, 255));
         addButton.setText("Añadir");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         editButton.setBackground(new java.awt.Color(62, 62, 62));
         editButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         editButton.setForeground(new java.awt.Color(255, 255, 255));
         editButton.setText("Editar");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
 
         deleteButton.setBackground(new java.awt.Color(62, 62, 62));
         deleteButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteButton.setText("Borrar");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout CompartirLayout = new javax.swing.GroupLayout(Compartir);
         Compartir.setLayout(CompartirLayout);
         CompartirLayout.setHorizontalGroup(
             CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CompartirLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(tabScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                .addComponent(tablaTitulos, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -214,7 +315,7 @@ public class Interfaz extends javax.swing.JFrame {
                         .addComponent(editButton)
                         .addGap(18, 18, 18)
                         .addComponent(deleteButton))
-                    .addComponent(tabScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tablaTitulos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(155, Short.MAX_VALUE))
         );
 
@@ -249,7 +350,7 @@ public class Interfaz extends javax.swing.JFrame {
                     .addGroup(groupSettingLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(titleGroup)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         groupSettingLayout.setVerticalGroup(
             groupSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +359,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(titleGroup)
                 .addGap(18, 18, 18)
                 .addComponent(groupName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         serverSettings.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
@@ -327,7 +428,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(TrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(serverSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(groupSetting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
 
         Pestanias.addTab("Trabajo", Trabajo);
@@ -342,7 +443,7 @@ public class Interfaz extends javax.swing.JFrame {
         );
         UsuariosLayout.setVerticalGroup(
             UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 415, Short.MAX_VALUE)
+            .addGap(0, 439, Short.MAX_VALUE)
         );
 
         Pestanias.addTab("Usuarios", Usuarios);
@@ -351,18 +452,28 @@ public class Interfaz extends javax.swing.JFrame {
         saveButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         saveButton.setForeground(new java.awt.Color(255, 255, 255));
         saveButton.setText("Guardar");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setBackground(new java.awt.Color(62, 62, 62));
         cancelButton.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelButton.setText("Cancelar");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(638, Short.MAX_VALUE)
+                .addContainerGap(639, Short.MAX_VALUE)
                 .addComponent(cancelButton)
                 .addGap(40, 40, 40)
                 .addComponent(saveButton)
@@ -402,6 +513,113 @@ public class Interfaz extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+       AnadirSeccion formulario = new AnadirSeccion(this, true);
+       
+       //Orden: ReadOnly, Nombre, Path, Guest Access , Comentario.
+       String[] datos = formulario.getDatos();
+       
+       if(datos == null){
+           System.out.println("Se dió el botón ATRÁS");
+       }else if(datos[0] == null){
+           System.out.println("Se CERRÓ LA VENTANA");
+       }else{
+           for(String dato : datos){
+             System.out.println(dato);
+           }
+           compartir.addSeccion(datos, (DefaultTableModel) tablaDatos.getModel());
+       }
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        if(tablaDatos.getSelectedRow() == -1){
+            System.out.println("Sin seleccionar");
+        }else{
+            //String para el formulario emergente.
+            String[] opciones = {"Yes" , "No"};
+            //Qué sección se selecciona
+            String seccionABorrar = (String) tablaDatos.getValueAt(tablaDatos.getSelectedRow(), 2);
+            System.out.println("A punto de eliminar la sección: " + seccionABorrar);
+            //Se abre un cuadro de dialogo para confirmar el borrado
+            int i = JOptionPane.showOptionDialog(this, "If you delete share " + seccionABorrar + ", all its settings will be lost.\nReally delete it?", "Eliminando Recurso", WIDTH, HEIGHT, null, opciones, opciones[0]);
+            if(i == 1){ //SE SELECCIONÓ NO
+                System.out.println("Se canceló el borrado");
+            }else{
+                compartir.deleteSeccion(tablaDatos.getSelectedRow(), tablaDatos, seccionABorrar);
+            }
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        if(tablaDatos.getSelectedRow() == -1){
+            System.out.println("Sin seleccionar");
+        }else{
+            compartir.editSeccion(tablaDatos.getSelectedRow(), tablaDatos);
+            //Se crea una copia de la copiar. Lindo no?, sólo se me ocurrió eso porque es lo mismo que tener el frame principal cuando colocas cancelar o guardar cambios.Es como un sueño dentro de otro sueño.
+            Path sourcePath = Paths.get("./smbCopia.conf");
+            Path destinationPath = Paths.get(".","smbCopia2.conf");
+            try {
+                // Usa REPLACE_EXISTING para sobrescribir el archivo destino si ya existe
+                Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                System.err.println("Error Al crear copia de la copiar : " + e.getMessage());
+            }
+            
+            //Cambio el smb que modificará el compartir
+            try{
+            Wini smbTemporal = new Wini(new File("./smbCopia2.conf"));
+            compartir.cambiarSmb(smbTemporal);
+            }catch(IOException e){
+                System.err.println("Error al cambiar al SMB TEMPORAL");
+            }
+            
+            String seccionAEditar = (String) tablaDatos.getValueAt(tablaDatos.getSelectedRow(), 2); //Qué seccion edito
+            EditarSeccion editarSeccion = new EditarSeccion(this, true); //creo el formulario
+            editarSeccion.inicializar(compartir, seccionAEditar); //inicialización del formulario
+            editarSeccion.setVisible(true);
+            
+            if(editarSeccion.taMadreEstoyCansado()){
+                System.out.println("Se Confirmaron cambios, toca guardar la copia2");
+                guardarCopiaSmb(directorioCopia2,directorioCopia);
+                
+            }else{
+                System.out.println("Se descartaron cambios, toca eliminar la copia2 sin guardar");
+                eliminarCopiaSmb(directorioCopia2);
+            }
+            
+            //Vuelvo a cambiar el Smb que manejará el compartir al smb Copia 1
+            try{
+            Wini smbTemporal = new Wini(new File("./smbCopia.conf"));
+            compartir.cambiarSmb(smbTemporal);
+            //Vuelvo a llenar la tabla
+            removerDatosTabla(); //Remuevo antiguas filas
+            compartir.leerSmb((DefaultTableModel) tablaDatos.getModel()); //Vuelvo a llenar la tabla
+            }catch(IOException e){
+                System.err.println("Error al cambiar al SMB Copia");
+            }
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        //DESCARTAMOS cambios solamente con borrar el archivo smbCopia y cerrar aplicación.
+        // Definir la ruta del archivo a eliminar
+        eliminarCopiaSmb(directorioCopia);
+        compartir.reiniciarServicioSMB();
+        System.exit(0);
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        //Esto confirma los cambios, por lo tanto se copia y reemplaza del smbCopia.conf al smb.conf original.
+        guardarCopiaSmb(directorioCopia,directorioSmb);
+        compartir.reiniciarServicioSMB();
+        System.exit(0); //Ah si, dijo que no salieramos de la app. toca borrar esto y ver cómo volver
+                        //a ejecutar la parte de hacer copia y crear un nuevo compartir que haga todo.
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -460,10 +678,17 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLayeredPane serverSettings;
     private javax.swing.JLabel subtitulo1;
     private javax.swing.JLabel subtitulo2;
-    private javax.swing.JScrollPane tabScroll;
-    private javax.swing.JTable tabShare;
+    private javax.swing.JTable tablaDatos;
+    private javax.swing.JScrollPane tablaTitulos;
     private javax.swing.JLabel titleGroup;
     private javax.swing.JLabel titleServer;
     private javax.swing.JLabel titulo1;
     // End of variables declaration//GEN-END:variables
+    
+    //aqui va mi la instancia de mi clase que hará todo las funciones de mi respectiva pestaña (DANIEL)
+    Compartir compartir;   
+    File smbCopia;
+    Path directorioCopia;
+    Path directorioCopia2;
+    Path directorioSmb;
 }

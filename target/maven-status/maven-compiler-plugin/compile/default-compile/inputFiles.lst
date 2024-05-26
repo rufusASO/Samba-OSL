@@ -1,6 +1,11 @@
-/home/suse/Escritorio/Git/Samba-OSL/src/main/java/com/rufus/sambagui/App.java
-/home/suse/Escritorio/Git/Samba-OSL/src/main/java/com/rufus/sambagui/Interfaz.java
-/home/suse/Escritorio/Git/Samba-OSL/src/main/java/com/rufus/sambagui/PrimaryController.java
-/home/suse/Escritorio/Git/Samba-OSL/src/main/java/com/rufus/sambagui/SecondaryController.java
-/home/suse/Escritorio/Git/Samba-OSL/src/main/java/module-info.java
-/home/suse/Escritorio/Git/Samba-OSL/src/main/java/com/rufus/sambagui/Principal.java
+/home/daniel/NetBeansProjects/proyectoSamba/segundoSambaProyecto/Samba-OSL/src/main/java/com/rufus/sambagui/SecondaryController.java
+/home/daniel/NetBeansProjects/proyectoSamba/segundoSambaProyecto/Samba-OSL/src/main/java/com/rufus/sambagui/Compartir.java
+/home/daniel/NetBeansProjects/proyectoSamba/segundoSambaProyecto/Samba-OSL/src/main/java/com/rufus/sambagui/EditarSeccion.java
+/home/daniel/NetBeansProjects/proyectoSamba/segundoSambaProyecto/Samba-OSL/src/main/java/com/rufus/sambagui/Interfaz.java
+/home/daniel/NetBeansProjects/proyectoSamba/segundoSambaProyecto/Samba-OSL/src/main/java/module-info.java
+/home/daniel/NetBeansProjects/proyectoSamba/segundoSambaProyecto/Samba-OSL/src/main/java/com/rufus/sambagui/Principal.java
+/home/daniel/NetBeansProjects/proyectoSamba/segundoSambaProyecto/Samba-OSL/src/main/java/com/rufus/sambagui/App.java
+/home/daniel/NetBeansProjects/proyectoSamba/segundoSambaProyecto/Samba-OSL/src/main/java/com/rufus/sambagui/EditarValor.java
+/home/daniel/NetBeansProjects/proyectoSamba/segundoSambaProyecto/Samba-OSL/src/main/java/com/rufus/sambagui/AnadirSeccion.java
+/home/daniel/NetBeansProjects/proyectoSamba/segundoSambaProyecto/Samba-OSL/src/main/java/com/rufus/sambagui/PrimaryController.java
+/home/daniel/NetBeansProjects/proyectoSamba/segundoSambaProyecto/Samba-OSL/src/main/java/com/rufus/sambagui/AnadirValor.java
