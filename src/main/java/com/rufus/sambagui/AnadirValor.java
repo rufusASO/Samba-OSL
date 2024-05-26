@@ -25,6 +25,8 @@ public class AnadirValor extends javax.swing.JDialog {
         panelPrincipal.setVisible(true);
         panelMask.setVisible(false);
         panelDirMask.setVisible(false);
+        panelGuest.setVisible(false);
+        panelRead.setVisible(false);
     }
 
     
@@ -59,7 +61,11 @@ public class AnadirValor extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         comboOpcion = new javax.swing.JComboBox<>();
         botonAtras1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        panelRead = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        campoRead = new javax.swing.JTextField();
+        botonAtras4 = new javax.swing.JButton();
+        botonOk4 = new javax.swing.JButton();
         panelMask = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         botonAtras2 = new javax.swing.JButton();
@@ -70,14 +76,18 @@ public class AnadirValor extends javax.swing.JDialog {
         campoDirMask = new javax.swing.JTextField();
         botonAtras3 = new javax.swing.JButton();
         botonOk3 = new javax.swing.JButton();
+        panelGuest = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        campoGuest = new javax.swing.JTextField();
+        botonAtras5 = new javax.swing.JButton();
+        botonOk5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(45, 45, 45));
-        setPreferredSize(new java.awt.Dimension(370, 260));
 
         jLabel2.setText("Selecciona Opción");
 
-        comboOpcion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Create mask", "Create directory mask" }));
+        comboOpcion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Create mask", "Create directory mask", "guest ok", "read only" }));
         comboOpcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboOpcionActionPerformed(evt);
@@ -102,12 +112,11 @@ public class AnadirValor extends javax.swing.JDialog {
                         .addComponent(comboOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addGap(125, 125, 125)
-                        .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(botonAtras1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(botonAtras1)))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,15 +130,57 @@ public class AnadirValor extends javax.swing.JDialog {
                 .addGap(18, 18, 18))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+        jLabel4.setText("Read Only:");
+
+        campoRead.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoReadActionPerformed(evt);
+            }
+        });
+
+        botonAtras4.setText("Cancelar");
+        botonAtras4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAtras4ActionPerformed(evt);
+            }
+        });
+
+        botonOk4.setText("Ok");
+        botonOk4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonOk4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelReadLayout = new javax.swing.GroupLayout(panelRead);
+        panelRead.setLayout(panelReadLayout);
+        panelReadLayout.setHorizontalGroup(
+            panelReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelReadLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(campoRead, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(121, Short.MAX_VALUE))
+            .addGroup(panelReadLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(botonAtras4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonOk4)
+                .addGap(24, 24, 24))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 260, Short.MAX_VALUE)
+        panelReadLayout.setVerticalGroup(
+            panelReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelReadLayout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addGroup(panelReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(campoRead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addGroup(panelReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonAtras4)
+                    .addComponent(botonOk4))
+                .addGap(20, 20, 20))
         );
 
         jLabel1.setText("Create Mask");
@@ -232,6 +283,54 @@ public class AnadirValor extends javax.swing.JDialog {
                 .addGap(21, 21, 21))
         );
 
+        jLabel5.setText("Guest ok:");
+
+        botonAtras5.setText("Cancelar");
+        botonAtras5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAtras5ActionPerformed(evt);
+            }
+        });
+
+        botonOk5.setText("Ok");
+        botonOk5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonOk5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelGuestLayout = new javax.swing.GroupLayout(panelGuest);
+        panelGuest.setLayout(panelGuestLayout);
+        panelGuestLayout.setHorizontalGroup(
+            panelGuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGuestLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(panelGuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGuestLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(campoGuest, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(107, Short.MAX_VALUE))
+                    .addGroup(panelGuestLayout.createSequentialGroup()
+                        .addComponent(botonAtras5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonOk5)
+                        .addGap(27, 27, 27))))
+        );
+        panelGuestLayout.setVerticalGroup(
+            panelGuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGuestLayout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addGroup(panelGuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(campoGuest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addGroup(panelGuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonAtras5)
+                    .addComponent(botonOk5))
+                .addGap(18, 18, 18))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -240,7 +339,9 @@ public class AnadirValor extends javax.swing.JDialog {
             .addComponent(panelMask, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelDirMask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelRead, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(panelGuest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +349,9 @@ public class AnadirValor extends javax.swing.JDialog {
             .addComponent(panelMask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelDirMask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelRead, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(panelGuest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -259,11 +362,15 @@ public class AnadirValor extends javax.swing.JDialog {
         if(eleccion.equals("Create mask")){
             panelPrincipal.setVisible(false);
             panelMask.setVisible(true);
-            panelDirMask.setVisible(false);
+        }else if(eleccion.equals("Create directory mask")){
+            panelPrincipal.setVisible(false);
+            panelDirMask.setVisible(true);
+        }else if(eleccion.equals("read only")){
+            panelPrincipal.setVisible(false);
+            panelRead.setVisible(true);
         }else{
             panelPrincipal.setVisible(false);
-            panelMask.setVisible(false);
-            panelDirMask.setVisible(true);
+            panelGuest.setVisible(true);
         }
         opcionValor[0] = eleccion;
     }//GEN-LAST:event_comboOpcionActionPerformed
@@ -274,7 +381,12 @@ public class AnadirValor extends javax.swing.JDialog {
     }//GEN-LAST:event_botonAtras2ActionPerformed
 
     private void botonOk2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOk2ActionPerformed
-        opcionValor[1] = campoMask.getText();
+        if(campoMask.getText().equals("")){
+            opcionValor = null;
+        }else{
+            opcionValor[1] = campoMask.getText();
+            
+        }
         dispose();
     }//GEN-LAST:event_botonOk2ActionPerformed
 
@@ -289,9 +401,48 @@ public class AnadirValor extends javax.swing.JDialog {
     }//GEN-LAST:event_botonAtras3ActionPerformed
 
     private void botonOk3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOk3ActionPerformed
-        opcionValor[1] = campoDirMask.getText();
+        if(campoDirMask.getText().equals("")){
+            opcionValor = null;
+        }else{
+            opcionValor[1] = campoDirMask.getText();
+            
+        }
         dispose();
     }//GEN-LAST:event_botonOk3ActionPerformed
+
+    private void botonAtras4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtras4ActionPerformed
+        opcionValor = null;
+        dispose();
+    }//GEN-LAST:event_botonAtras4ActionPerformed
+
+    private void botonOk4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOk4ActionPerformed
+        if(campoRead.getText().equals("")){
+            opcionValor = null;
+        }else{
+            opcionValor[1] = campoRead.getText();
+            
+        }
+        dispose();
+    }//GEN-LAST:event_botonOk4ActionPerformed
+
+    private void campoReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoReadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoReadActionPerformed
+
+    private void botonAtras5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtras5ActionPerformed
+        opcionValor = null;
+        dispose();
+    }//GEN-LAST:event_botonAtras5ActionPerformed
+
+    private void botonOk5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOk5ActionPerformed
+        if(campoGuest.getText().equals("")){
+            opcionValor = null;
+        }else{
+            opcionValor[1] = campoGuest.getText();
+            
+        }
+        dispose();
+    }//GEN-LAST:event_botonOk5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,17 +491,26 @@ public class AnadirValor extends javax.swing.JDialog {
     private javax.swing.JButton botonAtras1;
     private javax.swing.JButton botonAtras2;
     private javax.swing.JButton botonAtras3;
+    private javax.swing.JButton botonAtras4;
+    private javax.swing.JButton botonAtras5;
     private javax.swing.JButton botonOk2;
     private javax.swing.JButton botonOk3;
+    private javax.swing.JButton botonOk4;
+    private javax.swing.JButton botonOk5;
     private javax.swing.JTextField campoDirMask;
+    private javax.swing.JTextField campoGuest;
     private javax.swing.JTextField campoMask;
+    private javax.swing.JTextField campoRead;
     private javax.swing.JComboBox<String> comboOpcion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel panelDirMask;
+    private javax.swing.JPanel panelGuest;
     private javax.swing.JPanel panelMask;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelRead;
     // End of variables declaration//GEN-END:variables
 }
