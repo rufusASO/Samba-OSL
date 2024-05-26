@@ -123,6 +123,15 @@ public class Compartir {
             System.out.println("No se logró cambiar el valor");
         }
     }
+    public void addValor(String seccion,String[] opcionValor){
+        try{
+            smb.put(seccion, opcionValor[0], opcionValor[1]);
+            smb.put(seccion, opcionValor[0], opcionValor[1]);
+            smb.store();
+        }catch(IOException e){
+            System.out.println("No funca el addValor");
+        }
+    }
     
     public void reiniciarServicioSMB(){
         String s = "";

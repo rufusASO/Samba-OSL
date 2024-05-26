@@ -10,6 +10,11 @@ package com.rufus.sambagui;
  */
 public class AnadirValor extends javax.swing.JDialog {
 
+    String[] opcionValor = new String[2];
+    
+    
+    
+    
     /**
      * Creates new form anadirValor
      */
@@ -22,6 +27,25 @@ public class AnadirValor extends javax.swing.JDialog {
         panelDirMask.setVisible(false);
     }
 
+    
+    public String[] getDatos(){
+        this.setVisible(true);
+        return opcionValor;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,14 +58,18 @@ public class AnadirValor extends javax.swing.JDialog {
         panelPrincipal = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         comboOpcion = new javax.swing.JComboBox<>();
+        botonAtras1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         panelMask = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonAtras2 = new javax.swing.JButton();
+        botonOk2 = new javax.swing.JButton();
+        campoMask = new javax.swing.JTextField();
         panelDirMask = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        campoDirMask = new javax.swing.JTextField();
+        botonAtras3 = new javax.swing.JButton();
+        botonOk3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(45, 45, 45));
@@ -53,6 +81,13 @@ public class AnadirValor extends javax.swing.JDialog {
         comboOpcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboOpcionActionPerformed(evt);
+            }
+        });
+
+        botonAtras1.setText("Atrás");
+        botonAtras1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAtras1ActionPerformed(evt);
             }
         });
 
@@ -69,6 +104,10 @@ public class AnadirValor extends javax.swing.JDialog {
                         .addGap(125, 125, 125)
                         .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(botonAtras1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,83 +116,120 @@ public class AnadirValor extends javax.swing.JDialog {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(comboOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonAtras1)
+                .addGap(18, 18, 18))
         );
 
-        jLabel1.setText("Has elegido la opción mascara");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 260, Short.MAX_VALUE)
+        );
 
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Create Mask");
+
+        botonAtras2.setText("Cancelar");
+        botonAtras2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonAtras2ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Ok");
+        botonOk2.setText("Ok");
+        botonOk2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonOk2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelMaskLayout = new javax.swing.GroupLayout(panelMask);
         panelMask.setLayout(panelMaskLayout);
         panelMaskLayout.setHorizontalGroup(
             panelMaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMaskLayout.createSequentialGroup()
-                .addContainerGap(96, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(91, 91, 91))
             .addGroup(panelMaskLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(botonAtras2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addComponent(botonOk2)
                 .addGap(26, 26, 26))
+            .addGroup(panelMaskLayout.createSequentialGroup()
+                .addGroup(panelMaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelMaskLayout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(jLabel1))
+                    .addGroup(panelMaskLayout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(campoMask, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMaskLayout.setVerticalGroup(
             panelMaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMaskLayout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(80, 80, 80)
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoMask, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelMaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(botonOk2)
+                    .addComponent(botonAtras2))
                 .addGap(14, 14, 14))
         );
 
         jLabel3.setText("Directory mask");
 
-        jToggleButton1.setText("Cancelar");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonAtras3.setText("Cancelar");
+        botonAtras3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                botonAtras3ActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setText("Ok");
+        botonOk3.setText("Ok");
+        botonOk3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonOk3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelDirMaskLayout = new javax.swing.GroupLayout(panelDirMask);
         panelDirMask.setLayout(panelDirMaskLayout);
         panelDirMaskLayout.setHorizontalGroup(
             panelDirMaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDirMaskLayout.createSequentialGroup()
-                .addGap(142, 142, 142)
-                .addComponent(jLabel3)
+                .addGroup(panelDirMaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDirMaskLayout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(jLabel3))
+                    .addGroup(panelDirMaskLayout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(campoDirMask, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelDirMaskLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jToggleButton1)
+                .addGap(31, 31, 31)
+                .addComponent(botonAtras3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton2)
-                .addGap(46, 46, 46))
+                .addComponent(botonOk3)
+                .addGap(48, 48, 48))
         );
         panelDirMaskLayout.setVerticalGroup(
             panelDirMaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDirMaskLayout.createSequentialGroup()
                 .addGap(94, 94, 94)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(campoDirMask, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(panelDirMaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2))
-                .addGap(16, 16, 16))
+                    .addComponent(botonAtras3)
+                    .addComponent(botonOk3))
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -163,12 +239,16 @@ public class AnadirValor extends javax.swing.JDialog {
             .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelMask, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelDirMask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelMask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelDirMask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,17 +265,33 @@ public class AnadirValor extends javax.swing.JDialog {
             panelMask.setVisible(false);
             panelDirMask.setVisible(true);
         }
+        opcionValor[0] = eleccion;
     }//GEN-LAST:event_comboOpcionActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        panelPrincipal.setVisible(true);
-        panelMask.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void botonAtras2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtras2ActionPerformed
+        opcionValor = null;
+        dispose();
+    }//GEN-LAST:event_botonAtras2ActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        panelPrincipal.setVisible(true);
-        panelDirMask.setVisible(false);
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void botonOk2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOk2ActionPerformed
+        opcionValor[1] = campoMask.getText();
+        dispose();
+    }//GEN-LAST:event_botonOk2ActionPerformed
+
+    private void botonAtras1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtras1ActionPerformed
+        opcionValor = null;
+        dispose();
+    }//GEN-LAST:event_botonAtras1ActionPerformed
+
+    private void botonAtras3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtras3ActionPerformed
+        opcionValor = null;
+        dispose();
+    }//GEN-LAST:event_botonAtras3ActionPerformed
+
+    private void botonOk3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOk3ActionPerformed
+        opcionValor[1] = campoDirMask.getText();
+        dispose();
+    }//GEN-LAST:event_botonOk3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,14 +337,18 @@ public class AnadirValor extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonAtras1;
+    private javax.swing.JButton botonAtras2;
+    private javax.swing.JButton botonAtras3;
+    private javax.swing.JButton botonOk2;
+    private javax.swing.JButton botonOk3;
+    private javax.swing.JTextField campoDirMask;
+    private javax.swing.JTextField campoMask;
     private javax.swing.JComboBox<String> comboOpcion;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelDirMask;
     private javax.swing.JPanel panelMask;
     private javax.swing.JPanel panelPrincipal;

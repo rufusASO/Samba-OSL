@@ -212,8 +212,15 @@ public class EditarSeccion extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAddValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAddValorActionPerformed
-        AnadirValor formulario = new AnadirValor(this, true);
-        formulario.setVisible(true);
+        AnadirValor anadirValor = new AnadirValor(this, true);
+        String[] opcionValor = anadirValor.getDatos();
+        if(opcionValor == null){
+            //NO hace nada, me da flojera borrar esto. Hay veces que programo rapido y hago cosas obvias como esta y me da flojera borrarlas.
+        }else{
+            compartir.addValor(seccionEditandose ,opcionValor);
+            DefaultTableModel modeloTabla = (DefaultTableModel) tablaOpcion.getModel();
+            modeloTabla.addRow(new String[]{opcionValor[0], opcionValor[1]});
+        }
     }//GEN-LAST:event_botonAddValorActionPerformed
 
     private void botonEditValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditValorActionPerformed
