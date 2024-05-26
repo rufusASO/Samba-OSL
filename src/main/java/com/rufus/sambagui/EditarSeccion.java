@@ -220,6 +220,12 @@ public class EditarSeccion extends javax.swing.JDialog {
         if(tablaOpcion.getSelectedRow() != -1){
             String editandoOpcion = (String) tablaOpcion.getValueAt(tablaOpcion.getSelectedRow(), 0);
             System.out.println("Editando la Opcion : " + editandoOpcion);
+            EditarValor editarValor = new EditarValor(this,true);
+            editarValor.inicializar(editandoOpcion);
+            String nuevoValor = editarValor.getNuevoValor();
+            compartir.cambiarValor(seccionEditandose, editandoOpcion, nuevoValor);
+            DefaultTableModel modeloTabla = (DefaultTableModel) tablaOpcion.getModel();
+            modeloTabla.setValueAt(nuevoValor, tablaOpcion.getSelectedRow(), 1);
         }
     }//GEN-LAST:event_botonEditValorActionPerformed
 
@@ -237,6 +243,9 @@ public class EditarSeccion extends javax.swing.JDialog {
         if(tablaOpcion.getSelectedRow() != -1){
             String editandoOpcion = (String) tablaOpcion.getValueAt(tablaOpcion.getSelectedRow(), 0);
             compartir.deleteValor(seccionEditandose, editandoOpcion);
+            //Eliminando fila de la tabla
+            DefaultTableModel modeloTabla = (DefaultTableModel) tablaOpcion.getModel();
+            modeloTabla.removeRow(tablaOpcion.getSelectedRow());
         }
     }//GEN-LAST:event_botonDeleteValorActionPerformed
 

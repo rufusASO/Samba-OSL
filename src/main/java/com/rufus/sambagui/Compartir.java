@@ -50,7 +50,6 @@ public class Compartir {
             
             // Guardar los cambios en el archivo.
             smb.store();
-            reiniciarServicioSMB();
             System.out.println("Sección agregada exitosamente.");
         } catch (IOException e) {
             System.err.println("Error al modificar el archivo smb.conf: " + e.getMessage());
@@ -78,7 +77,6 @@ public class Compartir {
             
             DefaultTableModel modeloTabla = (DefaultTableModel) tabla.getModel();
             modeloTabla.removeRow(fila);
-            reiniciarServicioSMB();
         } catch (IOException e) {
             System.err.println("Error al modificar el archivo INI: " + e.getMessage());
         }
@@ -117,7 +115,14 @@ public class Compartir {
             System.out.println("No se pudo borrar la Opción: "+opcion);
         }
     }
-    
+    public void cambiarValor(String seccion, String opcion, String nuevoValor){
+        try{
+            smb.put(seccion, opcion, nuevoValor);
+            smb.store();
+        }catch(IOException e){
+            System.out.println("No se logró cambiar el valor");
+        }
+    }
     
     public void reiniciarServicioSMB(){
         String s = "";

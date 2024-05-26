@@ -48,6 +48,8 @@ public class Interfaz extends javax.swing.JFrame {
         }catch(IOException e){
             System.out.println("No se puede crar un WINI smb");
         }
+        //Se llena la tabla de compartir
+        compartir.leerSmb((DefaultTableModel) tablaDatos.getModel());
         
     }
     
@@ -89,6 +91,17 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }
     
+    public void removerDatosTabla(){
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaDatos.getModel();
+        int i = 0;
+        int j = modeloTabla.getRowCount();
+        while(i < j){
+            modeloTabla.removeRow(0);
+            i++;
+        }
+    }
+    
+    
     
     
     
@@ -120,9 +133,6 @@ public class Interfaz extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        botonPrueba = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        botonPrueba2 = new javax.swing.JButton();
         Trabajo = new javax.swing.JPanel();
         groupSetting = new javax.swing.JLayeredPane();
         titleGroup = new javax.swing.JLabel();
@@ -276,58 +286,24 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        botonPrueba.setText("Descarto");
-        botonPrueba.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonPruebaActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Leer y llenar tabla con datos de smb.conf");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        botonPrueba2.setText("Confirmo");
-        botonPrueba2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonPrueba2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout CompartirLayout = new javax.swing.GroupLayout(Compartir);
         Compartir.setLayout(CompartirLayout);
         CompartirLayout.setHorizontalGroup(
             CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CompartirLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(tablaTitulos)
+                .addComponent(tablaTitulos, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(32, 32, 32))
-            .addGroup(CompartirLayout.createSequentialGroup()
-                .addGap(153, 153, 153)
-                .addComponent(jButton2)
-                .addGap(100, 100, 100)
-                .addComponent(botonPrueba)
-                .addGap(18, 18, 18)
-                .addComponent(botonPrueba2)
-                .addContainerGap(168, Short.MAX_VALUE))
         );
         CompartirLayout.setVerticalGroup(
             CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CompartirLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonPrueba)
-                    .addComponent(jButton2)
-                    .addComponent(botonPrueba2))
-                .addGap(18, 18, 18)
+                .addGap(60, 60, 60)
                 .addGroup(CompartirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CompartirLayout.createSequentialGroup()
                         .addComponent(addButton)
@@ -598,9 +574,11 @@ public class Interfaz extends javax.swing.JFrame {
             EditarSeccion editarSeccion = new EditarSeccion(this, true); //creo el formulario
             editarSeccion.inicializar(compartir, seccionAEditar); //inicialización del formulario
             editarSeccion.setVisible(true);
+            
             if(editarSeccion.taMadreEstoyCansado()){
                 System.out.println("Se Confirmaron cambios, toca guardar la copia2");
                 guardarCopiaSmb(directorioCopia2,directorioCopia);
+                
             }else{
                 System.out.println("Se descartaron cambios, toca eliminar la copia2 sin guardar");
                 eliminarCopiaSmb(directorioCopia2);
@@ -610,25 +588,18 @@ public class Interfaz extends javax.swing.JFrame {
             try{
             Wini smbTemporal = new Wini(new File("./smbCopia.conf"));
             compartir.cambiarSmb(smbTemporal);
+            //Vuelvo a llenar la tabla
+            removerDatosTabla(); //Remuevo antiguas filas
+            compartir.leerSmb((DefaultTableModel) tablaDatos.getModel()); //Vuelvo a llenar la tabla
             }catch(IOException e){
                 System.err.println("Error al cambiar al SMB Copia");
             }
         }
         
         
+        
+        
     }//GEN-LAST:event_editButtonActionPerformed
-
-    private void botonPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPruebaActionPerformed
-        
-    }//GEN-LAST:event_botonPruebaActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        compartir.leerSmb((DefaultTableModel) tablaDatos.getModel());
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void botonPrueba2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPrueba2ActionPerformed
-        
-    }//GEN-LAST:event_botonPrueba2ActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         //DESCARTAMOS cambios solamente con borrar el archivo smbCopia y cerrar aplicación.
@@ -688,15 +659,12 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel Trabajo;
     private javax.swing.JPanel Usuarios;
     private javax.swing.JButton addButton;
-    private javax.swing.JButton botonPrueba;
-    private javax.swing.JButton botonPrueba2;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
     private javax.swing.JLabel estado;
     private javax.swing.JTextField groupName;
     private javax.swing.JLayeredPane groupSetting;
-    private javax.swing.JButton jButton2;
     private javax.swing.JRadioButton offSettings;
     private javax.swing.JRadioButton onSettings;
     private javax.swing.JComboBox<String> opciones1;
